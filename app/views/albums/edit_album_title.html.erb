@@ -1,0 +1,29 @@
+<%= form_for @album,:html =>{:id => "Edit_form"} do |f| %>
+  Old title : <%=  @album.title%><br>
+  <%= f.text_field :title%>
+  <%= submit_tag "Submit" %>
+<% end %>
+
+<% if  @album.errors.any? %>
+  <% flash.now[:alert]=@album.errors.full_messages.first %>
+<% elsif @c != 0 %>
+  <% flash.now[:success]="update success" %>
+<% end %>
+
+
+<%= render_flash_messages %>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  $('#Edit_form').validate({
+      rules:{
+        "album[title]": "required"
+      },
+      messages:{
+        "album[title]": "Please enter title!"
+      }
+    })
+})
+</script>
+<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>

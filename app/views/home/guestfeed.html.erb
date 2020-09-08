@@ -1,0 +1,525 @@
+<%= stylesheet_link_tag "fotobook_style" %>
+<%= javascript_pack_tag 'script'%>
+<div class="container-fluid">
+  <div class="navbar row py-1" style="background-color: #3C5999 ;" >
+          <div class="col-2 col-sm-3 col-md-2 text-right">
+              <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6">
+              <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+          </div>
+          <div class="col-4 col-sm-3 col-md-4 pl-5 text-right pr-5" >
+              <a class="text-white pl-5" style="font-size:20px" href="users/sign_up">Login</a>
+          </div>
+
+      </div>
+    <div class="row p-3 justify-content-center" style="background-color:#F8F8F8">
+      <div class="col-9 row d-flex justify-content-center" style="border-color:#3C5999;background-color:#FFFFFF">
+        <div class="col-12 d-flex justify-content-center">
+        <div class="m-3 btn-group">
+          <button class="btn rounded-left border chosen fb_background" id="btn-photo">PHOTO</button>
+          <button class="btn rounded-right border" id="btn-album">ALBUM</button>
+        </div> <br>
+      </div>
+
+      <div id="photo_tab">
+        <div class="col-12 d-flex justify-content-between px-0">
+          <div class="row m-4 justify-content-left font-size">
+          <!-- model begin -->
+          <div class="col row bg-grey py-2 rounded shadow mx-2 align-item-end">
+              <div class="col-6 d-flex justify-content-center">
+                <div class="d-flex mt-3 mr-5 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0">DK</button>
+                      <a href="#" class="btn font-size">Duc Khanh</a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  Nam tempor posuere faucibus
+                </div>
+                <div class="row" name="description-post">
+                  Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                  Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                </div>
+                <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                  <div class="col-auto text-color font-size love" style="padding-right:80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    4:56 pm 01/04/2018
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+            <!-- model begin -->
+            <div class="col row bg-grey py-2  rounded shadow mx-2 align-item-end">
+                <div class="col-6 d-flex justify-content-right">
+                  <div class="d-flex mt-3 justify-content-center discover_album">
+                    <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row justify-content-between align-items-center" name="info-part">
+                    <div class="col-8">
+                      <div class="row mb-2">
+                        <button class="rounded-circle chosen border-0">DK</button>
+                        <a href="#" class="btn font-size">Duc Khanh</a>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-2">
+                    </div>
+
+                  </div>
+                  <div class="row font-weight-bold" name="title-post">
+                    Nam tempor posuere faucibus
+                  </div>
+                  <div class="row" name="description-post">
+                    Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                    Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                  </div>
+                  <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                    <div class="col-auto text-color font-size love" style="padding-right:80px">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                    </div>
+                    <div class="col-auto text-secondary font-size-sm">
+                      4:56 pm 01/04/2018
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--model end-->
+          </div>
+        </div>
+
+        <div class="col-12 d-flex justify-content-between px-0">
+          <div class="row m-4 justify-content-left font-size">
+          <!-- model begin -->
+          <div class="col row bg-grey py-2 rounded shadow mx-2 align-item-end">
+              <div class="col-6 d-flex justify-content-center">
+                <div class="d-flex mt-3 mr-5 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0">DK</button>
+                      <a href="#" class="btn font-size">Duc Khanh</a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  Nam tempor posuere faucibus
+                </div>
+                <div class="row" name="description-post">
+                  Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                  Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                </div>
+                <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                  <div class="col-auto text-color font-size love" style="padding-right:80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    4:56 pm 01/04/2018
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+            <!-- model begin -->
+            <div class="col row bg-grey py-2  rounded shadow mx-2 align-item-end">
+                <div class="col-6 d-flex justify-content-right">
+                  <div class="d-flex mt-3 justify-content-center discover_album">
+                    <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row justify-content-between align-items-center" name="info-part">
+                    <div class="col-8">
+                      <div class="row mb-2">
+                        <button class="rounded-circle chosen border-0">DK</button>
+                        <a href="#" class="btn font-size">Duc Khanh</a>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-2">
+                    </div>
+
+                  </div>
+                  <div class="row font-weight-bold" name="title-post">
+                    Nam tempor posuere faucibus
+                  </div>
+                  <div class="row" name="description-post">
+                    Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                    Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                  </div>
+                  <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                    <div class="col-auto text-color font-size love" style="padding-right:80px">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                    </div>
+                    <div class="col-auto text-secondary font-size-sm">
+                      4:56 pm 01/04/2018
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--model end-->
+          </div>
+        </div>
+        <div class="col-12 d-flex justify-content-between px-0">
+          <div class="row m-4 justify-content-left font-size">
+          <!-- model begin -->
+          <div class="col row bg-grey py-2 rounded shadow mx-2 align-item-end">
+              <div class="col-6 d-flex justify-content-center">
+                <div class="d-flex mt-3 mr-5 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0">DK</button>
+                      <a href="#" class="btn font-size">Duc Khanh</a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  Nam tempor posuere faucibus
+                </div>
+                <div class="row" name="description-post">
+                  Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                  Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                </div>
+                <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                  <div class="col-auto text-color font-size love" style="padding-right:80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    4:56 pm 01/04/2018
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+            <!-- model begin -->
+            <div class="col row bg-grey py-2  rounded shadow mx-2 align-item-end">
+                <div class="col-6 d-flex justify-content-right">
+                  <div class="d-flex mt-3 justify-content-center discover_album">
+                    <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row justify-content-between align-items-center" name="info-part">
+                    <div class="col-8">
+                      <div class="row mb-2">
+                        <button class="rounded-circle chosen border-0">DK</button>
+                        <a href="#" class="btn font-size">Duc Khanh</a>
+                      </div>
+                    </div>
+                    <div class="col-4 pr-2">
+                    </div>
+
+                  </div>
+                  <div class="row font-weight-bold" name="title-post">
+                    Nam tempor posuere faucibus
+                  </div>
+                  <div class="row" name="description-post">
+                    Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                    Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                  </div>
+                  <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                    <div class="col-auto text-color font-size love" style="padding-right:80px">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                    </div>
+                    <div class="col-auto text-secondary font-size-sm">
+                      4:56 pm 01/04/2018
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--model end-->
+          </div>
+        </div>>
+        <!-- End -->
+        <div class="row bg-white mt-5 justify-content-center " style="height:50px">
+          <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+
+    <div id="album_tab" class="d-none">
+      <div class="col-12 d-flex justify-content-between px-0">
+        <div class="row m-4 justify-content-left font-size">
+        <!-- model begin -->
+        <div class="col row bg-grey py-2 rounded shadow mx-2 align-item-end">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="d-flex mt-3 mr-5 justify-content-center discover_album">
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row justify-content-between align-items-center" name="info-part">
+                <div class="col-8">
+                  <div class="row mb-2">
+                    <button class="rounded-circle chosen border-0">DK</button>
+                    <a href="#" class="btn font-size">Duc Khanh</a>
+                  </div>
+                </div>
+                <div class="col-4 pr-2">
+                </div>
+
+              </div>
+              <div class="row font-weight-bold" name="title-post">
+                Nam tempor posuere faucibus
+              </div>
+              <div class="row" name="description-post">
+                Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+              </div>
+              <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                <div class="col-auto text-color font-size love" style="padding-right:80px">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                </div>
+                <div class="col-auto text-secondary font-size-sm">
+                  4:56 pm 01/04/2018
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--model end-->
+          <!-- model begin -->
+          <div class="col row bg-grey py-2  rounded shadow mx-2 align-item-end">
+              <div class="col-6 d-flex justify-content-right">
+                <div class="d-flex mt-3 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0">DK</button>
+                      <a href="#" class="btn font-size">Duc Khanh</a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  Nam tempor posuere faucibus
+                </div>
+                <div class="row" name="description-post">
+                  Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                  Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                </div>
+                <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                  <div class="col-auto text-color font-size love" style="padding-right:80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    4:56 pm 01/04/2018
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-between px-0">
+        <div class="row m-4 justify-content-left font-size">
+        <!-- model begin -->
+        <div class="col row bg-grey py-2 rounded shadow mx-2 align-item-end">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="d-flex mt-3 mr-5 justify-content-center discover_album">
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row justify-content-between align-items-center" name="info-part">
+                <div class="col-8">
+                  <div class="row mb-2">
+                    <button class="rounded-circle chosen border-0">DK</button>
+                    <a href="#" class="btn font-size">Duc Khanh</a>
+                  </div>
+                </div>
+                <div class="col-4 pr-2">
+                </div>
+
+              </div>
+              <div class="row font-weight-bold" name="title-post">
+                Nam tempor posuere faucibus
+              </div>
+              <div class="row" name="description-post">
+                Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+              </div>
+              <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                <div class="col-auto text-color font-size love" style="padding-right:80px">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                </div>
+                <div class="col-auto text-secondary font-size-sm">
+                  4:56 pm 01/04/2018
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--model end-->
+          <!-- model begin -->
+          <div class="col row bg-grey py-2  rounded shadow mx-2 align-item-end">
+              <div class="col-6 d-flex justify-content-right">
+                <div class="d-flex mt-3 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0">DK</button>
+                      <a href="#" class="btn font-size">Duc Khanh</a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  Nam tempor posuere faucibus
+                </div>
+                <div class="row" name="description-post">
+                  Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                  Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                </div>
+                <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                  <div class="col-auto text-color font-size love" style="padding-right:80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    4:56 pm 01/04/2018
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+        </div>
+      </div>
+
+      <div class="col-12 d-flex justify-content-between px-0">
+        <div class="row m-4 justify-content-left font-size">
+        <!-- model begin -->
+        <div class="col row bg-grey py-2 rounded shadow mx-2 align-item-end">
+            <div class="col-6 d-flex justify-content-center">
+              <div class="d-flex mt-3 mr-5 justify-content-center discover_album">
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row justify-content-between align-items-center" name="info-part">
+                <div class="col-8">
+                  <div class="row mb-2">
+                    <button class="rounded-circle chosen border-0">DK</button>
+                    <a href="#" class="btn font-size">Duc Khanh</a>
+                  </div>
+                </div>
+                <div class="col-4 pr-2">
+                </div>
+
+              </div>
+              <div class="row font-weight-bold" name="title-post">
+                Nam tempor posuere faucibus
+              </div>
+              <div class="row" name="description-post">
+                Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+              </div>
+              <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                <div class="col-auto text-color font-size love" style="padding-right:80px">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                </div>
+                <div class="col-auto text-secondary font-size-sm">
+                  4:56 pm 01/04/2018
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--model end-->
+          <!-- model begin -->
+          <div class="col row bg-grey py-2  rounded shadow mx-2 align-item-end">
+              <div class="col-6 d-flex justify-content-right">
+                <div class="d-flex mt-3 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0">DK</button>
+                      <a href="#" class="btn font-size">Duc Khanh</a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  Nam tempor posuere faucibus
+                </div>
+                <div class="row" name="description-post">
+                  Aliquam dictum mec massa ac consequat. Etiam dignissim tincidunt tellus sed vestibulum.
+                  Sed vitae vestibulum purus. Curabitur malesuada libero in nibh pretium, sed malesuada nisi feugiat.
+                </div>
+                <div class="row justify-content-between align-items-center position-absolute feed_footer">
+                  <div class="col-auto text-color font-size love" style="padding-right:80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    4:56 pm 01/04/2018
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+        </div>
+      </div>
+      </div>
+    </div>
+
+    </div>
+
+
+
+  </div>

@@ -1,0 +1,77 @@
+
+<%= stylesheet_link_tag "fotobook_style" %>
+<%= javascript_pack_tag 'script'%>
+  <div class="container-fluid">
+    <div class="navbar row py-0" style="background-color: #3C5999 ">
+            <div class="col-2 text-right">
+                <a class="text-white ml-2" style="font-size:20px" href="feed.html">Fotobook</a>
+            </div>
+            <div class="col-7">
+                <input class="rounded border-light" name="search_bar" style="width:600px; height:32px" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+            </div>
+            <div class="col-3 row justify-content-between" >
+              <div class="col-6">
+                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html">DB</a>
+                <a class="btn text-white border-0" href="my_profile.html">Duc Bo</a>
+              </div>
+              <div class="col-6">
+                <a class="text-white pl-5" style="font-size:20px" href="">Login</a>
+              </div>
+            </div>
+      </div>
+      <div class="row p-3 justify-content-center" style="background-color:#F8F8F8">
+        <div class="col-2 pt-4 align-items-center">
+          <div class="row col ml-2">
+            <a class="btn text-secondary" href="feed.html" style="font-size:20px" >Feeds</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn text-secondary" href="#" style="font-size:20px" >Discover</a>
+          </div>
+        </div>
+      <div class="col-9 p-3">
+        <div class="col bg-white pb-3 mb-5">
+
+          <div class="font-weight-bold border-bottom py-4" style="font-size:20px;">New Photo</div>
+          <%= form_for @photo, url: user_photos_path(user_id: params.require(:user_id)), method: :post do |f| %>
+          <div class="row">
+            <div class="col px-4">
+              <div class="form-group-vertical mt-4">
+                <%= f.label :title %>
+                <%= f.text_field :title, placeholder: "Photo Title", class:"form-control col-11" %>
+              </div>
+              <div class="form-group-vertical my-4">
+                  <%= f.label :public, "Sharing mode" %> <br/>
+                  <%= f.select(:public, ['Public', 'Private'], {}, { :class => 'col-lg-5 col-md-11 custom-select' }) %>
+              </div>
+            </div>
+            <div class="col px-4">
+              <div class="form-group-vertical mt-4">
+                <%= f.label :description %>
+                <%= f.text_field :description, placeholder: "Photo Description", class:"form-control" %>
+              </div>
+            </div>
+          </div>
+          <div class="row mx-2 my-3">
+            <div class="row form-group-vertical border-dash border rounded justify-content-center pt-5" style="height:200px; width:200px;background-image: url('photo/add3.png');background-size:cover">
+              <!-- <label for="new_album"></label>
+              <input type="file" name="new_album" class="" accept="image/*" style="opacity:0;height:200px;width:200px"/> -->
+              <%= f.label :image %>
+              <%= f.file_field :image %>
+            </div>
+          </div>
+          <div class="row mx-2 my-5">
+              <%= f.submit "Save"%>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+  </div>
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="js/script.js"></script>

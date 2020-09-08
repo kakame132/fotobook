@@ -1,0 +1,216 @@
+<%= stylesheet_link_tag "fotobook_style" %>
+<%= javascript_pack_tag 'script'%>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+<div class="container-fluid">
+  <div class="navbar row py-1" style="background-color: #3C5999;" >
+          <div class="col-2 col-sm-3 col-md-2 text-right">
+              <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6">
+              <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+          </div>
+          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+            <div class="col-md-7 col-12">
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=@u.last_name[0]%><%=@u.first_name[0]%></a>
+              <a class="btn border-0 text-white hidden-xs" href="my_profile.html"><%=@u.first_name%> </a>
+            </div>
+            <div class=" col-md-5 text-center hidden-xs justify-content-center">
+              <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
+            </div>
+          </div>
+
+      </div>
+    <div class="row p-3 justify-content-center grey_background">
+      <div class="col-2 pt-4 align-items-center">
+        <div class="row col ml-2">
+          <a class="btn text-secondary head_font" href="feed.html">Feeds</a>
+        </div>
+        <div class="row col ml-2">
+          <a class="btn head_font fb_color" href="#" ><b>Discover</b></a>
+        </div>
+      </div>
+
+
+      <div class="col-12 col-sm-9 row d-flex justify-content-center bg-white text-dark">
+        <div class="col-12 d-flex justify-content-center">
+        <div class="m-3 btn-group">
+          <button class="btn rounded-left border chosen fb_background" id="btn-photo">PHOTO</button>
+          <button class="btn rounded-right border" id="btn-album">ALBUM</button>
+        </div> <br>
+      </div>
+
+
+
+      <div id="photo_tab" class="">
+        <div class=" row d-flex justify-content-center px-0">
+        <% @p.each do |i| %>
+          <!-- model begin -->
+          <div class="col-12 col-md-5 m-2 row grey_background rounded shadow">
+              <div class="col-12 col-md-6 d-flex justify-content-center">
+                <div class="d-flex justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0"><%= i.user.last_name[0].upcase %><%= i.user.first_name[0].upcase %></button>
+                      <a href="#" class="btn font-size"><%= i.user.first_name %></a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                    <button class="btn btn-sm font-size-sm followed rounded-pill px-1 py-0" name="follow">Following</button>
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                  <%= i.title %>
+                </div>
+                <div class="row overflow-auto" name="description-post">
+                  <%= i.description %>
+                </div>
+                <div class="row justify-content-between align-items-center top-100 feed_footer">
+                  <div class="col-auto text-color font-size love">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                  <%=i.created_at.to_s(:time)%> <%=i.created_at.to_date%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+            <!-- model begin -->
+              <!--model end-->
+        <%end%>
+        </div>
+      </div>
+
+
+
+
+      <div id="album_tab" class="d-none">
+        <div class="row d-flex justify-content-center px-0">
+        <% @a.each do |i| %>
+          <!-- model begin -->
+          <div class="col-12 row col-md-5 grey_background rounded shadow m-3">
+              <div class="col-12 col-md-6 d-flex justify-content-center pr-5">
+                <div class="d-flex mt-3 justify-content-center discover_album">
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                </div>
+              </div>
+              <div class="col-12 col-md-5">
+                <div class="row justify-content-between align-items-center" name="info-part">
+                  <div class="col-8">
+                    <div class="row mb-2">
+                      <button class="rounded-circle chosen border-0"><%= i.user.last_name[0].upcase %><%= i.user.first_name[0].upcase %></button>
+                      <a href="#" class="btn font-size"><%=i.user.first_name%></a>
+                    </div>
+                  </div>
+                  <div class="col-4 pr-2">
+                    <button class="btn btn-sm font-size-sm followed rounded-pill px-1 py-0" name="follow">Following</button>
+                  </div>
+
+                </div>
+                <div class="row font-weight-bold" name="title-post">
+                   <%=i.title %>
+                </div>
+                <div class="row" name="description-post">
+                  <%=i.description %>
+                </div>
+                <div class="row justify-content-between align-items-center top-100 feed_footer">
+                  <div class="col-auto text-color font-size love">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                  </div>
+                  <div class="col-auto text-secondary font-size-sm">
+                    <%=i.created_at.to_s(:time)%> <%=i.created_at.to_date%>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--model end-->
+            <!-- model begin -->
+              <!--model end-->
+        <% end%>
+        </div>
+      </div>
+
+
+
+
+        <!-- End -->
+        <div class="row bg-white mt-5 justify-content-center " style="height:50px">
+          <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div id="modal-photo" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header border-0">
+          <p class="modal-title font-weight-bold" id="modal-photo-title"></p>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body my-n1 py-0">
+          <img src="" class="img" id="modal-photo-body" style="width:100%"/>
+          <p id="modal-photo-description" style="font-size:10px" class="pt-2"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="modal-album" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header border-0">
+            <p class="modal-title font-weight-bold" id="modal-album-title"></p>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body my-n1 py-0">
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="photo/batman.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="photo/batman.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                  <img src="photo/batman.jpg" class="d-block w-100" alt="...">
+                </div>
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+            </div>
+            <p id="modal-album-description" style="font-size:10px" class="pt-2"></p>
+          </div>
+        </div>
+      </div>
+    </div>

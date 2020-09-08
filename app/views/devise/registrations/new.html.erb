@@ -1,0 +1,110 @@
+<%= stylesheet_link_tag "fotobook_style" %>
+
+<div class="container-fluid">
+  <div class="navbar row py-1" style="background-color: #3C5999 ">
+          <div class="col-2 text-right">
+              <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+          </div>
+          <div class="col-8">
+              <input class="rounded border-light" name="search_bar" style="width:600px; height:32px" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+          </div>
+          <div class="col-2 d-flex pl-5 align-items-center" >
+              <a class="text-white pl-5" style="font-size:20px" href="">Login</a>
+          </div>
+
+      </div>
+    <div class="d-flex justify-content-center">
+        <h2 class="font-weight-bold" style=" padding-top:70px; color:#3C5999; font-size:40px;line-height:47px">Fotobook SignUp</h2>
+    </div>
+
+    <div class="d-flex justify-content-center pt-2">
+      <div class="row d-flex justify-content-center pt-2" style="width:436px;height:92px; border: 2px solid #E0E0E0">
+        <div class="col-4 d-flex justify-content-center"><img style="width:70px;height;70px" src="photo/google.png"></div>
+        <div class="col-4 d-flex justify-content-center"><img style="width:70px;height;70px" src="photo/facebook.png"></div>
+        <div class="col-4 d-flex justify-content-center"><img style="width:70px;height;70px" src="photo/twitter.png"></div>
+      </div>
+    </div>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <form class="pt-3" action="#" method="post">
+          <div class="row my-3 justify-content-center">
+            <div class="grey_background justify-content-center shadow border rounded  mb-5 pb-4" style="width:436px" >
+              <div class="row justify-content-center">
+                <form class="mt-5 col row" action="#" method="post">
+                  <div class="form-group mx-5 pt-5 col-9" style="font-size: 16px;">
+                    <%= f.label :Firstname %><br />
+                    <%= f.text_field :first_name,class:"w-100", autocomplete: "first_name" %>
+                  </div>
+                  <div class="form-group mx-5 col-9" style="font-size: 16px;">
+                    <%= f.label :Lastname %><br />
+                    <%= f.text_field :last_name,class:"w-100", autocomplete: "last_name" %>
+                  </div>
+                  <div class="form-group mx-5 col-9" style="font-size: 16px;">
+                    <%= f.label :email %><br />
+                    <%= f.email_field :email,class:"w-100", autofocus: true, autocomplete: "email" %>
+                  </div>
+                  <div class="form-group mx-5 col-9" style="font-size: 16px;">
+                    <%= f.label :password %>
+                    <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length%> characters minimum)</em>
+                    <% end %><br />
+                    <%= f.password_field :password,class:"w-100", autocomplete: "new-password" %>
+                  </div>
+                  <div class="form-group mx-5 col-9" style="font-size: 16px;">
+                    <%= f.label :password_confirmation %><br />
+                    <%= f.password_field :password_confirmation,class:"w-100", autocomplete: "new-password" %>
+                </div>
+                </form>
+              </div>
+              <div class="row justify-content-center">
+                  <%= f.submit "Sign up" %>
+            </div>
+            <div class="d-flex justify-content-center">
+            <%- if controller_name != 'sessions' %>
+              <%= link_to "Log in", new_session_path(resource_name) %><br />
+            <% end %>
+            </div>
+            <div class="d-flex justify-content-center">
+            <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+              <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
+            <% end %>
+            </div>
+            </div>
+          </div>
+        </form>
+        <% end %>
+      </div>
+
+
+</div>
+
+
+<script type="text/javascript">
+	$('#new_user').validate({
+		rules: {
+			'user[first_name]': "required",
+			'user[last_name]': "required",
+      'user[email]':"required",
+			'user[password]': {
+				required: true,
+				minlength: 8
+			},
+			'user[password_confirmation]': {
+				equalTo: "#user_password_confirmation",
+				required: true
+			}
+		},
+		messages:  {
+		    'user[first_name]':"Please enter your first name!",
+		    'user[last_name]':"Please enter your last name!",
+        'user[email]':"Please enter your email!",
+		    'user[password]':{
+		        required:"Please enter your password!",
+		        minlength:"Your password must be at least 8 characters long!"
+		    },
+		    'user[password_confirmation]':{
+		        equalTo:"Password is not the same!",
+		        required:"Please enter your password!"
+		    },
+		}
+	});
+</script>

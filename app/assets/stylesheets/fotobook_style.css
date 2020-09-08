@@ -1,0 +1,83 @@
+.selector-for-some-widget {
+ box-sizing: content-box;
+}
+div {
+ border: 1px red solid;
+}
+body{
+  font-family: Roboto;
+  font-style: normal;
+  font-weight:  bold;
+}
+
+.close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width:19px;height:19px;
+  }
+.grey_background{
+  background-color:#F8F8F8;
+}
+
+.fb_background{
+  background-color: #3C5999;
+  color:white
+}
+
+.fb_color{
+  color:#3C5999;
+}
+/* button[name="follow"]{
+background:linear-gradient(238.39deg, #EB6057 27.49%, #F2994A 69.05%);
+color:white;
+} */
+.followed{
+  background:linear-gradient(238.39deg, #EB6057 27.49%, #F2994A 69.05%);
+  color:white;
+}
+.follow{
+  background-color: white;
+  color: orange;
+  border: 2px solid orange;
+
+}
+.rotate_pic1{
+  transform:rotate(4deg);
+}
+.head_font{
+  font-size: 20px;
+}
+.search{
+  width:600px; height:32px;
+}
+.rotate_pic2{
+  transform:rotate(10deg)
+}
+.feed_footer{
+  bottom:0
+}
+.square_photo{
+  width:200px;height:200px;
+}
+.square_edit_photo{
+  width:220px;height:220px;
+}
+.discover_album{
+  width:270px;height:270px;
+  overflow: hidden;
+}
+.change_button{
+  opacity: 0.7;
+  bottom:0;
+}
+/*admin edit ph albums*/
+.photo_edit{
+  position:absolute;top:0;height:30px;color:white;width:200px;background-color:black;opacity:0.5;
+}
+.admin_photo_title{
+  height:30px;color:white;width:170px;overflow:hidden;
+}
+.admin_album_size{
+  width:170px;height:170px;
+}
