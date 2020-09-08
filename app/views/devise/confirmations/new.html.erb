@@ -16,7 +16,8 @@
         <h2 class="font-weight-bold" style=" padding-top:60px; color:#3C5999; font-size:40px;line-height:47px">Fotobook Login</h2>
     </div>
 
-  <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+  <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
     <form class="pt-3" action="#" method="post">
           <div class="row justify-content-center">
             <div class=" mt-5 grey_background justify-content-center shadow border rounded mb-5 pb-4" style="width:400px" >
@@ -32,6 +33,7 @@
               <div class="actions d-flex justify-content-center mt-3">
                 <%= f.submit "Resend confirmation instructions" %>
               </div>
+
               <div class="row justify-content-center mt-4">
               <%- if controller_name != 'sessions' %>
                 <%= link_to "Log in", new_session_path(resource_name) %><br />
