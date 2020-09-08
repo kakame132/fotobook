@@ -15,9 +15,9 @@ class User < ApplicationRecord
   has_many :followers, through: :received_follows, source: :follower
   has_many :given_follows, foreign_key: :follower_id, class_name: "Follow"
   has_many :followings, through: :given_follows, source: :followed_user
-  after_save :sendmail
+  after_commit :sendmail
   private
     def sendmail
-      SendEmailJob.perform_later self
+      SendEmailJob.perform_now self
     end
 end
