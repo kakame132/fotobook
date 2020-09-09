@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'newest', to: 'home#newest'
   get 'feed', to: 'home#feed'
   get 'discover', to: 'home#discover'
-  resources :users ,except: [:index, :destroy] do
+  resources :users ,except: [:destroy] do
     member do
       get 'profile', to: 'home#profile'
    end

@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
   def index
-    render root_path
   end
   def new
     @user = User.new
@@ -19,7 +18,15 @@ class UsersController < ApplicationController
       redirect_to action: :new
     end
   end
-
+  def show
+    if( params[:id] == current_user.id.to_s)
+      @u = User.find(params[:id])
+      render "my_profile"
+    else
+      @u = User.find(params[:id])
+      render "public_profile"
+    end
+  end
   private
     def user_detail
       params.require(:user).permit(:last_name, :first_name, :password, :email)

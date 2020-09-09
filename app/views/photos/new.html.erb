@@ -2,23 +2,24 @@
 <%= stylesheet_link_tag "fotobook_style" %>
 <%= javascript_pack_tag 'script'%>
   <div class="container-fluid">
-    <div class="navbar row py-0" style="background-color: #3C5999 ">
-            <div class="col-2 text-right">
-                <a class="text-white ml-2" style="font-size:20px" href="feed.html">Fotobook</a>
+    <div class="navbar row py-1" style="background-color: #3C5999;" >
+            <div class="col-2 col-sm-3 col-md-2 text-right">
+                <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
             </div>
-            <div class="col-7">
-                <input class="rounded border-light" name="search_bar" style="width:600px; height:32px" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+            <div class="col-6 col-sm-6 col-md-6">
+                <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
             </div>
-            <div class="col-3 row justify-content-between" >
-              <div class="col-6">
-                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html">DB</a>
-                <a class="btn text-white border-0" href="my_profile.html">Duc Bo</a>
+            <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+              <div class="col-md-7 col-12">
+                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html">DK</a>
+                <a class="btn border-0 text-white hidden-xs" href="my_profile.html">Duc Bo </a>
               </div>
-              <div class="col-6">
-                <a class="text-white pl-5" style="font-size:20px" href="">Login</a>
+              <div class=" col-md-5 text-center hidden-xs justify-content-center">
+                <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
               </div>
             </div>
-      </div>
+
+        </div>
       <div class="row p-3 justify-content-center" style="background-color:#F8F8F8">
         <div class="col-2 pt-4 align-items-center">
           <div class="row col ml-2">

@@ -12,8 +12,8 @@
           </div>
           <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
             <div class="col-md-7 col-12">
-              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html">DK</a>
-              <a class="btn border-0 text-white hidden-xs" href="my_profile.html">Duc Bo </a>
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=@u.last_name[0]%><%=@u.first_name[0]%></a>
+              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%= @u.first_name%> </a>
             </div>
             <div class=" col-md-5 text-center hidden-xs justify-content-center">
               <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
@@ -27,10 +27,11 @@
           <a class="btn head_font fb_color" href="#"><b>Feeds</b></a>
         </div>
         <div class="row col ml-2">
-          <a class="btn text-secondary head_font" href="discover.html">Discover</a>
+          <a class="btn text-secondary head_font" href="discover">Discover</a>
         </div>
       </div>
-      <div class="col-9 row d-flex justify-content-center bg-white text-dark">
+
+      <div class="col-12 col-sm-9 row d-flex justify-content-center bg-white text-dark">
         <div class="col-12 d-flex justify-content-center">
         <div class="m-3 btn-group">
           <button class="btn rounded-left border chosen fb_background" id="btn-photo">PHOTO</button>
@@ -38,7 +39,7 @@
         </div> <br>
       </div>
 
-      <div id="photo_tab" class="">
+      <div id="photo_tab" class="col-12">
         <div class=" row d-flex justify-content-center px-0">
         <% @p.each do |i| %>
           <!-- model begin -->
@@ -53,7 +54,7 @@
                   <div class="col-8">
                     <div class="row mb-2">
                       <button class="rounded-circle chosen border-0"><%= i.user.last_name[0].upcase %><%= i.user.first_name[0].upcase %></button>
-                      <a href="#" class="btn font-size"><%= i.user.first_name %></a>
+                      <a href="<%= user_path(i.user_id)%>" class="btn font-size"><%= i.user.first_name %></a>
                     </div>
                   </div>
                   <div class="col-4 pr-2">
@@ -83,7 +84,7 @@
         </div>
       </div>
 
-      <div id="album_tab" class="d-none">
+      <div id="album_tab" class="d-none col-12">
         <div class="row d-flex justify-content-center px-0">
         <% @a.each do |i| %>
           <!-- model begin -->
@@ -100,7 +101,7 @@
                   <div class="col-8">
                     <div class="row mb-2">
                       <button class="rounded-circle chosen border-0"><%= i.user.last_name[0].upcase %><%= i.user.first_name[0].upcase %></button>
-                      <a href="#" class="btn font-size"><%=i.user.first_name%></a>
+                      <a href="<%= user_path(i.user_id)%>" class="btn font-size"><%=i.user.first_name%></a>
                     </div>
                   </div>
                   <div class="col-4 pr-2">
@@ -130,7 +131,11 @@
         </div>
       </div>
         <!-- End -->
-
+        <div class="col-12 bg-white  justify-content-center " style="height:50px">
+          <div class="spinner-border text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
       </div>
       <div class="col-sm col-0">
       </div>

@@ -1,7 +1,11 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!, :except => [:guestfeed]
   def guestfeed
-    render 'guestfeed'
+    if(user_signed_in?)
+      redirect_to :feed
+    else
+      render 'guestfeed'
+    end
   end
 
   def newest
@@ -10,14 +14,14 @@ class HomeController < ApplicationController
     render 'newest'
   end
   def feed
-    @u=User.find_by(id:2)
+    @u=User.find(current_user.id)
     @p=Photo.order(created_at: :desc).limit(6)
     @a=Album.order(created_at: :desc).limit(6)
     render 'feed'
   end
-  
+
   def discover
-    @u=User.find_by(id:2)
+    @u=User.find(current_user.id)
     @p=Photo.order(created_at: :desc).limit(6)
     @a=Album.order(created_at: :desc).limit(6)
     # @l=User.find_by(id:1)

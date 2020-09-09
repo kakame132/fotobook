@@ -1,9 +1,9 @@
 .selector-for-some-widget {
  box-sizing: content-box;
 }
-div {
+/* div {
  border: 1px red solid;
-}
+} */
 body{
   font-family: Roboto;
   font-style: normal;
@@ -80,4 +80,7 @@ color:white;
 }
 .admin_album_size{
   width:170px;height:170px;
+}
+.my_profile_photo{
+  width:185px;height:185px;
 }

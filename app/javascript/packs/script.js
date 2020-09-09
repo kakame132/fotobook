@@ -11,7 +11,6 @@ $(document).ready(function() {
       }
     }
   })
-
   btnAlbum.on({
     "click": function() {
       if (!btnAlbum.hasClass("chosen")) {
@@ -22,7 +21,6 @@ $(document).ready(function() {
       }
     }
   })
-
   $(".love").on({
     "click": function() {
       var icon = $(this).children("svg");
@@ -37,7 +35,6 @@ $(document).ready(function() {
       }
     }
   })
-
   $("img").on({
     "click": function() {
       var title = $(this).parent().parent().find("div[name='title-post']").html();
@@ -57,8 +54,6 @@ $(document).ready(function() {
       }
     }
   })
-
-  
   $("button[name='follow']").on({
     "click": function() {
       if ($(this).hasClass("followed")) {
@@ -73,7 +68,6 @@ $(document).ready(function() {
       }
     }
   })
-
   $("#btn-photo").on({
     "click": function() {
       $(this).addClass("fb_background")
@@ -81,7 +75,6 @@ $(document).ready(function() {
 
     }
   })
-
   $("#btn-album").on({
     "click": function() {
       $(this).addClass("fb_background")
