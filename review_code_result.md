@@ -78,3 +78,53 @@ end
 ```
 
 12. Đã train SLIM rồi thì view prefer viết = SLIM hơn là ERB
+
+
+# Review Code Result 20200914
+---
+
+1. Các page listing cần có phân trang
+
+    - app/controllers/home_controller.rb
+
+
+2. Route define ko hợp lý. `admin` ko phải là 1 resource trong app này. resource là ứng với đối tượng gì đó cần được quản lý (CRUD), admin ko phải là 1 thứ như vậy.
+
+
+3. Việc define routes ko hợp lý làm code controller cũng không hợp lý. Việc quản lý tất cả mọi thứ chỉ trong 1 controller admin sẽ làm controller trở nên phức tạp và khó maintain.
+
+4. Default rails sẽ render template cùng tên với action nếu mình ko chỉ định gì khác, nên việc viết kiểu như `render 'manage_photo'` là dư thừa.
+
+
+5. Tên của variable thấy ghê quá, cần đặt cho có ý nghĩa. Tránh kiểu đặt như `@a=Album.all.order(updated_at: :desc).limit(20)`, nên là `@albums = Album.order(updated_at: :desc).limit(20)`
+
+
+6. Style của code chưa đẹp, chưa dễ đọc
+
+    - Sau các operator cần có space. Ví dụ: `@u=current_user` => `@user = current_user`
+
+    - Code thì chỗ indent = 2 spaces, chỗ thì 4 spaces  
+
+
+7. Code dư thừa
+
+    - `current_user` có thể access dc ở view và helper, trong controller gán `current_user` vào biến `@` để làm gì?
+
+
+8. Code query lấy data quá tốn kém
+
+    - app/controllers/home_controller.rb#feed: giả sử `current_user` đang follow 20 users khác thì action này tốn 40 câu queries xuống database để lấy data. Quá đắt đỏ!
+
+
+9. Các chức năng của admin nên chia code ra riêng, nằm ở 1 namespace riêng. Đừng có gắng chèn chung vào controller dành cho user thường rồi vào đó if-else lung tung rất khó maintain
+
+10. Khai báo association cần nghĩ về tính toàn vẹn dữ liệu. Ví dụ khi 1 Photo bị xóa thì `likes` thuộc về nó cũng nên bị xóa, hoặc khi 1 user thì xóa thì những gì nó `likes` hoặc photos/albums của nó cũng cần remove đi.
+
+
+11. Đã train SLIM rồi thì view prefer viết = SLIM hơn là ERB
+
+12. CSS và JS cần dc include vào template từ layout luôn chứ ko nên đi từng file rồi lại include lại.
+
+13. Không dùng inline CSS/JS, cần style/js gì thì viết ra file đàng hoàng
+
+14. Code template đang bị lặp lại nhiều. Cần suy nghĩ về việc tách những code bị lặp lại ra layout, và những code lặp giữa form create/edit ra partial 
