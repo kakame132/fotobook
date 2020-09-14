@@ -39,7 +39,7 @@ class AlbumsController < ApplicationController
       @album=Album.find(params[:id])
     end
     @photo =@album.photos.new(photo_params)
-    @photo.user_id=current_user.id
+    @photo.user_id=@album.user_id
     if @photo.save
       # @album = current_user.albums.find(params[:id])
       if @album.update_attributes(album_params)

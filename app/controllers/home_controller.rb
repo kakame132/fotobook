@@ -8,6 +8,8 @@ class HomeController < ApplicationController
         redirect_to :feed
       end
     else
+      @p=Photo.order(created_at: :desc).limit(6)
+      @a=Album.order(created_at: :desc).limit(6)
       render 'guestfeed'
     end
   end
@@ -18,6 +20,7 @@ class HomeController < ApplicationController
     @c=0
     render 'newest'
   end
+
   def feed
     @u=current_user
     @p=current_user.followings.map { |user| user.photos.all.where(public:true).order(created_at: :desc) }.flatten!
