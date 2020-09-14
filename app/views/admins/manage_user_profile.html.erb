@@ -1,61 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/fotobook_style.css">
-
-    <title>new_Photo</title>
-</head>
-<body>
-  <div class="container-fluid">
-    <div class="navbar row py-0 fb_background">
-            <div class="col-2 text-right">
-                <a class="text-white ml-2" style="font-size:20px" href="">Fotobook Admin</a>
+<div class="container-fluid">
+    <div class="navbar row py-1" style="background-color: #3C5999;" >
+            <div class="col-2 col-sm-3 col-md-2 text-right">
+                <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
             </div>
-            <div class="col-7">
-                <input class="rounded border-light" name="search_bar" style="width:600px; height:32px" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+            <div class="col-6 col-sm-6 col-md-6">
+                <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
             </div>
-            <div class="col-3 row justify-content-between" >
-              <div class="col-6">
-                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html">DB</a>
-                <a class="btn text-white border-0" href="my_profile.html">Duc Bo</a>
+            <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+              <div class="col-md-7 col-12">
+                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=current_user.last_name[0]%><%=current_user.first_name[0]%></a>
+                <a class="btn border-0 text-white hidden-xs" href="#"><%=current_user.first_name%> </a>
               </div>
-              <div class="col-6">
-                <a class="text-white pl-5" style="font-size:20px" href="">Login</a>
+              <div class=" col-md-5 text-center hidden-xs justify-content-center">
+                <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
               </div>
             </div>
-      </div>
-      <div class="row grey_background">
-        <div class="col mt-5 mt-5 pt-4 align-items-center">
-          <div class="row col ml-2">
-            <a class="btn text-secondary font-size font-weight-bold" href="manage_photo.html">Manage Photos</a>
+        </div>
+      <div class="row grey_background  px-3">
+        <div class="col-2  mt-3 pt-4 align-items-center ">
+          <div class="row col  ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_photo_path(current_user.id)%>">Manage Photos</a>
           </div>
           <div class="row col ml-2">
-            <a class="btn text-secondary font-size font-weight-bold" href="manage_album.html">Manage Albums</a>
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_album_path(current_user.id)%>">Manage Albums</a>
           </div>
           <div class="row col ml-2">
-            <a class="btn font-size text-color font-weight-bold fb_color" href="manage_user.html">Manage Users</a>
+            <a class="btn font-size text-color font-weight-bold fb_color" href="<%=admin_manage_user_path(current_user.id)%>">Manage Users</a>
           </div>
         </div>
-
-
-        <div class="col-9 p-3 mt-5">
+        <div class="col-9 p-3">
           <div class="col-12 row">
           <div class="col-12 bg-white pb-3 mb-5 row">
 
             <div class="font-weight-bold border-bottom py-4 col-12" style="font-size:20px">
                 Edit User Profile
             </div>
+            <%= form_for @u do |f| %>
             <div class="row col-12 justify-content-center">
               <div class="row col-8 justify-content-center">
                 <div class="row col-12 justify-content-center">
                   <div class="col-8 d-flex justify-content-center">
                     <div class="row mt-5 mb-3 col-6 square_photo justify-content-center" name="profile-image">
                       <img src="photo/dilinh.jpeg" alt="profile-image" class="img-fluid square_photo rounded">
-                      <button type="button" name="change-profile" class="btn bg-white text-secondary position-absolute change_button" style="bottom:0">CHANGE</button>
+                      <div class="col-9 d-flex justify-content-center position-absolute" style="bottom:0">
+                        <button type="button" name="change-profile" class="btn bg-white position-absolute text-secondary change_button">CHANGE</button>
+                        <%= f.file_field :image, style:" opacity:0;width:93px;height:31px;"%>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -93,31 +83,17 @@
 
               </div>
             </div>
+            <%end%>
 
 
           </div>
-            <div class="row col-12 footer justify-content-center align-items-end col">
-              <nav>
-                <ul class="pagination ">
-                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                  <li class="page-item"><a class="page-link" href="#">1</a></li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
-                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-              </nav>
-            </div>
+
           </div>
 
         </div>
-        <div class="col">
-        </div>
+      <div class="col-1">
       </div>
     </div>
-  <script src="https://kit.fontawesome.com/3dc3c39fce.js" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  <script src="js/script.js"></script>
-  </body>
-  </html>
+    <script src="https://kit.fontawesome.com/3dc3c39fce.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag "fotobook_style" %>
+    <%= javascript_pack_tag 'script'%>

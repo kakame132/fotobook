@@ -22,10 +22,10 @@
             <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_photo_path(current_user.id)%>">Manage Photos</a>
           </div>
           <div class="row col ml-2">
-            <a class="btn font-size text-color font-weight-bold fb_color" href="<%=admin_manage_album_path(current_user.id)%>">Manage Albums</a>
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_album_path(current_user.id)%>">Manage Albums</a>
           </div>
           <div class="row col ml-2">
-            <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_user_path(current_user.id)%>">Manage Users</a>
+            <a class="btn font-size text-color font-weight-bold fb_color" href="<%=admin_manage_user_path(current_user.id)%>">Manage Users</a>
           </div>
         </div>
         <div class="col-9 p-3 mt-3">
@@ -41,28 +41,16 @@
                  </tr>
                  </thead>
                  <tbody>
+                <%@u.each do |i|%>
                  <tr>
-                     <td>Duc Bo 1</td>
-                     <td>Tran</td>
-                     <td>tranducbo@gmail.com</td>
+                     <td><%=i.first_name%></td>
+                     <td><%=i.last_name%></td>
+                     <td><%=i.email%></td>
                      <td>4:56am 04/06/2018</td>
                      <!-- <td><button type="button" class="btn add py-0 bg-success"><a >Edit</a></button> <button type="button" class="btn delete py-0 bg-danger">Delete</button></td> -->
-                     <td><a class="btn bg-success py-0 px-3 mb-2" href="manage_user_profile.html">Edit</a><a class="btn bg-danger py-0 px-3 mb-2 ml-2" href="manage_user_profile.html">Delete</a></td>
+                     <td><a class="btn bg-success py-0 text-white px-3 mb-2" href=" <%=edit_admin_user_path(id:i.id)%>">Edit</a><a class="btn bg-danger text-white py-0 px-3 mb-2 ml-2" href="manage_user_profile.html">Delete</a></td>
                  </tr>
-                 <tr>
-                    <td>Duc Bo 2</td>
-                    <td>Tran</td>
-                    <td>tranducbo@gmail.com</td>
-                     <td>4:56am 04/06/2018</td>
-                     <td><a class="btn bg-success py-0 px-3 mb-2" href="manage_user_profile.html">Edit</a><a class="btn bg-danger py-0 px-3 mb-2 ml-2" href="manage_user_profile.html">Delete</a></td>
-                 </tr>
-                 <tr>
-                   <td>Duc Bo 3</td>
-                   <td>Tran</td>
-                   <td>tranducbo@gmail.com</td>
-                     <td>4:56am 04/06/2018</td>
-                     <td><a class="btn bg-success py-0 px-3 mb-2" href="manage_user_profile.html">Edit</a><a class="btn bg-danger py-0 px-3 mb-2 ml-2" href="manage_user_profile.html">Delete</a></td>
-                 </tr>
+                 <%end%>
                  </tbody>
              </table>
 

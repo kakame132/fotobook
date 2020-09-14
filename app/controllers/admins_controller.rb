@@ -14,6 +14,7 @@ class AdminsController < ApplicationController
   end
 
   def manage_user
+    @u=User.all.limit(10)
     render 'manage_user'
   end
 

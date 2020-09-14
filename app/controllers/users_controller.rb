@@ -18,6 +18,19 @@ class UsersController < ApplicationController
       redirect_to action: :new
     end
   end
+
+
+  def edit
+    if current_user.admin== true
+      @u=User.where(id: params[:id]).first
+      render "admins/manage_user_profile"
+    else
+      redirect_to edit_user_registration_path
+    end
+  end
+
+
+
   def show
     if( params[:id] == current_user.id.to_s)
       @u = current_user
