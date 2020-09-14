@@ -12,8 +12,8 @@
           </div>
           <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
             <div class="col-md-7 col-12">
-              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=@u.last_name[0]%><%=@u.first_name[0]%></a>
-              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%= @u.first_name%> </a>
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=current_user.last_name[0]%><%=current_user.first_name[0]%></a>
+              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%= current_user.first_name%> </a>
             </div>
             <div class=" col-md-5 text-center hidden-xs justify-content-center">
               <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
@@ -46,7 +46,7 @@
           <div class="col-12 col-md-5 m-2 row grey_background rounded shadow">
               <div class="col-12 col-md-6 d-flex justify-content-center">
                 <div class="d-flex justify-content-center discover_album">
-                  <img src=i.image.url alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  <%= image_tag i.image_url(:feed) if i.image_url.present?%>
                 </div>
               </div>
               <div class="col-12 col-md-6">

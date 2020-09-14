@@ -1,8 +1,8 @@
 class Album < ApplicationRecord
   belongs_to :user
-  has_and_belongs_to_many:photos
   has_many :likes, as: :likeable
-  validates :title, presence: true, length: {maximum: 140,minimum:10, message:"max",message:"SERVER: AT LEAST 10 CHARACTERS"}
+  has_many :photos, dependent: :destroy
+  validates :title, presence: true, length: {maximum: 140,minimum:10}
   validates :description,length: {maximum: 300}
   before_save :ensure_description_has_value
   private

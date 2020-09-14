@@ -20,15 +20,15 @@ class UsersController < ApplicationController
   end
   def show
     if( params[:id] == current_user.id.to_s)
-      @u = User.find(params[:id])
+      @u = current_user
       render "my_profile"
     else
-      @u = User.find(params[:id])
+      @u = User.where(id: params[:id]).first
       render "public_profile"
     end
   end
   private
     def user_detail
-      params.require(:user).permit(:last_name, :first_name, :password, :email)
+      params.require(:user).permit(:last_name, :first_name, :password, :email,:image)
     end
 end

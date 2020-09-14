@@ -1,6 +1,4 @@
 
-<%= stylesheet_link_tag "fotobook_style" %>
-<%= javascript_pack_tag 'script'%>
   <div class="container-fluid">
     <div class="navbar row py-1" style="background-color: #3C5999;" >
             <div class="col-2 col-sm-3 col-md-2 text-right">
@@ -11,14 +9,13 @@
             </div>
             <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
               <div class="col-md-7 col-12">
-                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html">DK</a>
-                <a class="btn border-0 text-white hidden-xs" href="my_profile.html">Duc Bo </a>
+                <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0]%><%=User.find(current_user.id).first_name[0]%></a>
+                <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
               </div>
               <div class=" col-md-5 text-center hidden-xs justify-content-center">
                 <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
               </div>
             </div>
-
         </div>
       <div class="row p-3 justify-content-center" style="background-color:#F8F8F8">
         <div class="col-2 pt-4 align-items-center">
@@ -33,7 +30,7 @@
         <div class="col bg-white pb-3 mb-5">
 
           <div class="font-weight-bold border-bottom py-4" style="font-size:20px;">New Photo</div>
-          <%= form_for @photo, url: user_photos_path(user_id: params.require(:user_id)), method: :post do |f| %>
+          <%= form_for @photo,html: { :multipart => true } do |f| %>
           <div class="row">
             <div class="col px-4">
               <div class="form-group-vertical mt-4">
@@ -42,7 +39,7 @@
               </div>
               <div class="form-group-vertical my-4">
                   <%= f.label :public, "Sharing mode" %> <br/>
-                  <%= f.select(:public, ['Public', 'Private'], {}, { :class => 'col-lg-5 col-md-11 custom-select' }) %>
+                  <%= f.select(:public, [['Public',true], ['Private',false]], {}, { :class => 'col-lg-5 col-md-11 custom-select' }) %>
               </div>
             </div>
             <div class="col px-4">
@@ -53,15 +50,15 @@
             </div>
           </div>
           <div class="row mx-2 my-3">
-            <div class="row form-group-vertical border-dash border rounded justify-content-center pt-5" style="height:200px; width:200px;background-image: url('photo/add3.png');background-size:cover">
+            <div class="form-group-vertical border-dash border rounded justify-content-center p-0" style="height:200px; width:200px;background-image: url('https://png.pngtree.com/png-clipart/20190516/original/pngtree-vector-plus-icon-png-image_4272692.jpg');background-size:cover">
               <!-- <label for="new_album"></label>
               <input type="file" name="new_album" class="" accept="image/*" style="opacity:0;height:200px;width:200px"/> -->
-              <%= f.label :image %>
-              <%= f.file_field :image %>
+              <%= f.file_field :image,style:"height:200px;width:200px;opacity:0"%>
             </div>
           </div>
+
           <div class="row mx-2 my-5">
-              <%= f.submit "Save"%>
+              <%= f.submit "Save",class:"btn btn-success py-1 px-4"%>
           </div>
           <% end %>
         </div>
@@ -71,8 +68,5 @@
     </div>
   </div>
 
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="js/script.js"></script>
+  <%= stylesheet_link_tag "fotobook_style" %>
+  <%= javascript_pack_tag 'script'%>

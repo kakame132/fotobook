@@ -19,10 +19,10 @@
     <div class="row p-3 justify-content-center" style="background-color:#F8F8F8">
       <div class="col-2  pt-4 align-items-center">
         <div class="row col ml-2">
-          <a class="btn text-secondary head_font" href="feed.html" >Feeds</a>
+          <a class="btn text-secondary head_font" href="<%=feed_path%>" >Feeds</a>
         </div>
         <div class="row col ml-2">
-          <a class="btn text-secondary head_font" href="#" >Discover</a>
+          <a class="btn text-secondary head_font" href="<%=discover_path%>" >Discover</a>
         </div>
       </div>
       <div class="col-12 col-md-9 p-0 d-flex justify-content-center">
@@ -31,14 +31,19 @@
           <div class="font-weight-bold border-bottom py-4 col-12" style="font-size:20px">
               Edit User Profile<%= resource_name.to_s.humanize %>
           </div>
-
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
           <div class="row col-12 justify-content-center">
             <div class="row col-12 col-md-8 justify-content-center">
               <div class="row col-12 justify-content-center">
                 <div class="col-12 col-md-8 d-flex justify-content-center">
-                  <div class="row mt-5 mb-3 col-12 col-md-6 square_photo justify-content-center" name="profile-image">
-                    <img src="photo/dilinh.jpeg" alt="profile-image" class="img-fluid square_photo rounded">
-                    <button type="button" name="change-profile" class="btn bg-white text-secondary position-absolute change_button" style="bottom:0">CHANGE</button>
+                  <div class="row mt-5 form-group-vertical mb-3 col-12 col-md-6 square_photo justify-content-center" name="profile-image">
+                    <img src="<%=current_user.image.url%>" alt="profile-image" class="img-fluid square_photo rounded">
+                    <div class="col-9 d-flex justify-content-center position-absolute" style="bottom:0">
+                      <button type="button" name="change-profile" class="btn bg-white position-absolute text-secondary change_button">CHANGE</button>
+                      <%= f.file_field :image, style:" opacity:0;width:93px;height:31px;"%>
+                    </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -46,8 +51,7 @@
                 <div class="col-8 fb_color d-flex justify-content-center">Basic Information</div>
               </div>
               <div class="col-12 pb-5 px-0">
-                <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-                <%= render "devise/shared/error_messages", resource: resource %>
+
               <div class="form-group mb-0 mx-2 row col-12">
                 <%= f.label :Firstname,class:"col-8 col-md-4 text-right py-2"%><br />
                 <%= f.text_field :first_name,class:"form-control col-12 col-md-8", autocomplete: "first_name",placeholder:"First Name" %>

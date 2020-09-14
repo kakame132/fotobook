@@ -10,8 +10,8 @@
           </div>
           <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
             <div class="col-md-7 col-12">
-              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=@u.last_name[0]%><%=@u.first_name[0]%></a>
-              <a class="btn border-0 text-white hidden-xs" href="#"><%=@u.first_name%> </a>
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=current_user.last_name[0]%><%=current_user.first_name[0]%></a>
+              <a class="btn border-0 text-white hidden-xs" href="#"><%=current_user.first_name%> </a>
             </div>
             <div class=" col-md-5 text-center hidden-xs justify-content-center">
               <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
@@ -31,7 +31,7 @@
         <div class="col-12 d-flex justify-content-center">
           <div class="col row pt-5 px-4" name="profile-header">
             <div class="col-3 d-flex justify-content-center">
-              <img src="photo/batman.jpg" alt="avatar" class="img-fluid rounded-circle"  style="width:171px;height:171px"/>
+              <img src="<%=current_user.image.url(:avatar)%>" alt="avatar" class="img-fluid rounded-circle"  style="width:171px;height:171px"/>
             </div>
             <div class="col-9">
               <div class="row" style="height:40px;">
@@ -68,15 +68,16 @@
             <!-- model for row -->
             <div class="row mx-3 mb-4">
               <div class="col-12">
-                <a type="button" name="add" class="float-right bg-success text-white btn rounded-pill add py-1" href="<%= new_user_photos_path(current_user.id)%>">Add Photo</a>
+                <a type="button" name="add" class="float-right bg-success text-white btn rounded-pill add py-1" href="<%= new_photo_path%>">Add Photo</a>
               </div>
             </div>
             <div class="row mx-3 my-1">
-              <%@u.photos.each do |i |%>
+              <%@u.photos.where(album_id: nil).order(updated_at: :desc).each do |i |%>
 
               <div class="col-12 col-md-3 px-3 text-center justify-content-center">
-                <div class="d-flex justify-content-center">
+                <div class="row d-flex justify-content-center">
                   <%= image_tag i.image_url(:thumb) if i.image_url.present? %>
+                  <a type="button" name="add" class="btn position-absolute text-white py-0 rounded edit_button" href="<%= edit_photo_path(id: i.id)%>">Edit</a>
                 </div>
                 <p name="photo-tilte" class="font-size"><%=i.title%></p>
               </div>
@@ -92,17 +93,25 @@
             <!-- model for album row -->
             <div class="row mx-3 mb-4">
               <div class="col-12">
-                <a type="button" name="add" class="float-right bg-success text-white btn rounded-pill add py-1" href="new_album.html">Add Album</a>
+                <a type="button" name="add" class="float-right bg-success text-white btn rounded-pill add py-1" href="<%= new_album_path%>">Add Album</a>
               </div>
             </div>
             <div class="row my-1">
-              <%@u.albums.each do |i |%>
+              <%@u.albums.order(updated_at: :desc).each do |i |%>
               <div class="col-12 col-md-3 thumb  px-3 album-thumb border-0">
                 <div class="thumb-container justify-content-center row">
                   <div class="images-container col-12 d-flex justify-content-center"style="width:200px;height:200px">
-                    <img src="photo/dilinh.jpeg" style="position:absolute;width:200px;height:200px" alt="" class="thumbnail-fluid img-fluid border">
-                    <img src="photo/dilinh.jpeg" style="position:absolute;width:200px;height:200px;transform:rotate(4deg)" alt="" class="thumbnail-fluid img-fluid border">
-                    <img src="photo/batman.jpeg" style="position:absolute;width:200px;height:200px;transform:rotate(10deg)" alt="" class="thumbnail-fluid img-fluid border">
+                    <%if i.photos.empty?%>
+                    <img src="" style="position:absolute;width:200px;height:200px;background-color:grey;" alt="" class="thumbnail-fluid img-fluid border">
+                    <img src="" style="position:absolute;width:200px;height:200px;transform:rotate(4deg);background-color:grey;" alt="" class="thumbnail-fluid img-fluid border">
+                    <img src="" style="position:absolute;width:200px;height:200px;transform:rotate(10deg);background-color:grey;" alt="" class="thumbnail-fluid img-fluid border">
+                    <%else%>
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" style="position:absolute;width:200px;height:200px;transform:rotate(10deg)" alt="" class="thumbnail-fluid img-fluid border">
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" style="position:absolute;width:200px;height:200px;transform:rotate(4deg)" alt="" class="thumbnail-fluid img-fluid border">
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" style="position:absolute;width:200px;height:200px;" alt="" class="thumbnail-fluid img-fluid border">
+                      <a type="button" name="add" class="btn position-absolute text-white py-0 rounded edit_album_button" style="margin-top:200px" href="<%= edit_album_path(id: i.id)%>">Edit</a>
+
+                    <%end%>
                     <div class="content text-center mt-5 text-white font-size-lg rounded-circle"style="position:absolute;background-color:rgba(51, 51, 51, 0.4)">
                       <div class="number" style="opacity:1">
                         <%=i.photos.count%>
@@ -130,13 +139,13 @@
           <div class="d-none pt-5 col-12" name="followings-tab">
             <!-- model for followings-tab row -->
             <div class="row mx-3 my-1">
-              <%@u.followings.each do |i|%>
+              <%@u.followings.order(updated_at: :desc).each do |i|%>
               <div class="col-12 col-md-3 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
                 <div class="row mt-3 d-flex justify-content-center">
-                  <img src="photo/momo.png" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
+                  <img src="<%=i.image.url(:avatar)%>" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
                 </div>
                 <div class="my-1 justify-content-center row col-12">
-                  <p class="font-weight-bold mb-0"><%=i.first_name%></p>
+                  <a href="<%= user_path(i.id)%>" class="btn font-size"><%= i.first_name %></a>
                 </div>
                 <div class="row justify-content-center text-primary col-12">
                   <div class="col">
@@ -161,13 +170,13 @@
           <div class="d-none pt-5 col-12" name="followers-tab">
             <!-- model for followings-tab row -->
             <div class="row mx-3 my-1">
-              <%@u.followers.each do |i|%>
+              <%@u.followers.order(updated_at: :desc).each do |i|%>
               <div class="col-12 col-md-3 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
                 <div class="row mt-3 d-flex justify-content-center">
-                  <img src="photo/momo.png" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
+                  <img src="<%=i.image.url(:avatar)%>" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
                 </div>
                 <div class="my-1 justify-content-center row col-12">
-                  <p class="font-weight-bold mb-0"><%=i.first_name%></p>
+                  <a href="<%= user_path(i.id)%>" class="btn font-size"><%= i.first_name %></a>
                 </div>
                 <div class="row justify-content-center text-primary col-12">
                   <div class="col">

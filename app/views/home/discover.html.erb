@@ -53,7 +53,7 @@
           <div class="col-12 col-md-5 m-2 row grey_background rounded shadow">
               <div class="col-12 col-md-6 d-flex justify-content-center">
                 <div class="d-flex justify-content-center discover_album">
-                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  <%= image_tag i.image_url(:feed) if i.image_url.present?%>
                 </div>
               </div>
               <div class="col-12 col-md-6">

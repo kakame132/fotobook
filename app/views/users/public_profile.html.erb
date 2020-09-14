@@ -8,8 +8,8 @@
           </div>
           <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
             <div class="col-md-7 col-12">
-              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=User.find(current_user.id).last_name[0]%><%=User.find(current_user.id).first_name[0]%></a>
-              <a class="btn border-0 text-white hidden-xs" href="my_profile.html"><%=User.find(current_user.id).first_name%> </a>
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0]%><%=User.find(current_user.id).first_name[0]%></a>
+              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
             </div>
             <div class=" col-md-5 text-center hidden-xs justify-content-center">
               <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
@@ -29,7 +29,7 @@
         <div class="col-12 d-flex justify-content-center">
           <div class="col row pt-5 px-4" name="profile-header">
             <div class="col-3 d-flex justify-content-center">
-              <img src="photo/batman.jpg" alt="avatar" class="img-fluid rounded-circle"  style="width:171px;height:171px"/>
+              <img src="<%=@u.image.url(:avatar)%>" alt="avatar" class="img-fluid rounded-circle"  style="width:171px;height:171px"/>
             </div>
             <div class="col-9">
               <div class="row" style="height:40px;">
@@ -64,9 +64,9 @@
         <div class="col-12 d-flex justify-content-center">
           <div class="col-12 pt-5" name="photos-tab">
             <!-- model for row -->
-            <div class="row mx-3 my-1">
-              <%@u.photos.each do |i |%>
-              <div class="col-12 col-md-3 px-3 text-center justify-content-center">
+            <div class="row mx-3 my-1 ">
+              <%@u.photos.order(updated_at: :desc).each do |i |%>
+              <div class="col-12 col-md-3 px-3 mt-5 text-center justify-content-center">
                 <div class="d-flex justify-content-center ">
                   <%= image_tag i.image_url(:thumb) if i.image_url.present? %>
                 </div>
@@ -83,8 +83,8 @@
           <div class="d-none col-12 pt-5" name="albums-tab">
             <!-- model for album row -->
             <div class="row my-1 mx-3">
-              <%@u.albums.each do |i |%>
-              <div class="col-12 col-md-3 thumb  px-3 album-thumb border-0">
+              <%@u.albums.order(updated_at: :desc).each do |i |%>
+              <div class="col-12 col-md-3 mt-5 thumb  px-3 album-thumb border-0">
                 <div class="thumb-container justify-content-center row">
                   <div class="images-container col-12 d-flex justify-content-center"style="width:200px;height:200px">
                     <img src="photo/dilinh.jpeg" style="position:absolute;width:200px;height:200px" alt="" class="thumbnail-fluid img-fluid border">
@@ -116,13 +116,13 @@
           <div class="d-none pt-5 col-12" name="followings-tab">
             <!-- model for followings-tab row -->
             <div class="row mx-3 my-1">
-              <%@u.followings.each do |i|%>
-              <div class="col-12 col-md-3 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
+              <%@u.followings.order(updated_at: :desc).each do |i|%>
+              <div class="col-12 col-md-3 mt-5 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
                 <div class="row mt-3 d-flex justify-content-center">
                   <img src="photo/momo.png" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
                 </div>
                 <div class="my-1 justify-content-center row col-12">
-                  <p class="font-weight-bold mb-0"><%=i.first_name%></p>
+                  <a href="<%= user_path(i.id)%>" class="btn font-size"><%= i.first_name %></a>
                 </div>
                 <div class="row justify-content-center text-primary col-12">
                   <div class="col">
@@ -145,13 +145,13 @@
           <div class="d-none col-12 pt-5" name="followers-tab">
             <!-- model for followings-tab row -->
             <div class="row mx-3 my-1">
-              <%@u.followers.each do |i|%>
-              <div class="col-12 col-md-3 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
+              <%@u.followers.order(updated_at: :desc).each do |i|%>
+              <div class="col-12 col-md-3 mt-5 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
                 <div class="row mt-3 d-flex justify-content-center">
                   <img src="photo/momo.png" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
                 </div>
                 <div class="my-1 justify-content-center row col-12">
-                  <p class="font-weight-bold mb-0"><%=i.first_name%></p>
+                  <a href="<%= user_path(i.id)%>" class="btn font-size"><%= i.first_name %></a>
                 </div>
                 <div class="row justify-content-center text-primary col-12">
                   <div class="col">

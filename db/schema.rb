@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_032621) do
+ActiveRecord::Schema.define(version: 2020_09_10_093210) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,13 +25,6 @@ ActiveRecord::Schema.define(version: 2020_09_08_032621) do
     t.integer "likes"
     t.bigint "user_id"
     t.index ["user_id"], name: "index_albums_on_user_id"
-  end
-
-  create_table "albums_photos", id: false, force: :cascade do |t|
-    t.bigint "photo_id", null: false
-    t.bigint "album_id", null: false
-    t.index ["album_id"], name: "index_albums_photos_on_album_id"
-    t.index ["photo_id"], name: "index_albums_photos_on_photo_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -61,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_09_08_032621) do
     t.integer "likes"
     t.text "image"
     t.bigint "user_id"
+    t.bigint "album_id"
+    t.index ["album_id"], name: "index_photos_on_album_id"
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
 
@@ -79,11 +74,13 @@ ActiveRecord::Schema.define(version: 2020_09_08_032621) do
     t.string "first_name", limit: 30
     t.string "last_name", limit: 30
     t.boolean "admin", default: false
+    t.text "image"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "albums", "users"
+  add_foreign_key "photos", "albums"
   add_foreign_key "photos", "users"
 end

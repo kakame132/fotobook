@@ -1,0 +1,75 @@
+<div class="container-fluid">
+    <div class="navbar row py-1" style="background-color: #3C5999;" >
+            <div class="col-2 col-sm-3 col-md-2 text-right">
+                <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+            </div>
+            <div class="col-6 col-sm-6 col-md-6">
+                <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+            </div>
+            <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+              <div class="col-md-7 col-12">
+                <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=current_user.last_name[0]%><%=current_user.first_name[0]%></a>
+                <a class="btn border-0 text-white hidden-xs" href="#"><%=current_user.first_name%> </a>
+              </div>
+              <div class=" col-md-5 text-center hidden-xs justify-content-center">
+                <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
+              </div>
+            </div>
+        </div>
+      <div class="row grey_background  px-3">
+        <div class="col-2  mt-3 pt-4 align-items-center ">
+          <div class="row col  ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_photo_path(current_user.id)%>">Manage Photos</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn font-size text-color font-weight-bold fb_color" href="<%=admin_manage_album_path(current_user.id)%>">Manage Albums</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admin_manage_user_path(current_user.id)%>">Manage Users</a>
+          </div>
+        </div>
+        <div class="col-9 p-3 mt-3">
+          <div class="row bg-white pb-3 mb-5 p-0" style="height:1000px">
+
+            <%@a.each do |i|%>
+              <div class=" col-2 mx-5 mt-3 d-flex justify-content-center" style="height:255px;width:255px;background-color:#E2E2E2;">
+                <div class="d-flex mt-4 justify-content-center admin_album_size">
+                  <%if i.photos.empty?%>
+                    <%= image_tag 'no_image.png',style:"width:200px;height:200px;"%>
+                  <%else%>
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail rotate_pic2 square_photo">
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute rotate_pic1 square_photo">
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute square_photo">
+                  <%end%>
+                </div>
+                <div class="row justify-content-center album_edit">
+                  <div class="col-10 pl-0 admin_photo_title">
+                    <span id="photo_title"><%=i.title%></span>
+                  </div>
+                  <a class="btn col-2 d-flex far fa-edit" href="<%=edit_album_path(i.id)%>" ></a>
+                  <!-- <i ="fad fa-edit" ></i> -->
+                </div>
+
+              </div>
+          <%end%>
+        </div>
+            <div class="row footer justify-content-center align-items-end col pt-0">
+              <nav>
+                <ul class="pagination ">
+                  <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                  <li class="page-item"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+              </nav>
+            </div>
+
+
+      </div>
+      <div class="col-1">
+      </div>
+    </div>
+    <script src="https://kit.fontawesome.com/3dc3c39fce.js" crossorigin="anonymous"></script>
+    <%= stylesheet_link_tag "fotobook_style" %>
+    <%= javascript_pack_tag 'script'%>

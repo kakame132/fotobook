@@ -5,16 +5,17 @@ Rails.application.routes.draw do
   get 'newest', to: 'home#newest'
   get 'feed', to: 'home#feed'
   get 'discover', to: 'home#discover'
-  resources :users ,except: [:destroy] do
-    member do
-      get 'profile', to: 'home#profile'
-   end
-   resource :photos
-   resource :albums
+  resources :users, only: :show do
+    resources :photos, :albums, only: :index
   end
+
   resources :photos ,except: ['show']
   resources :albums ,except: ['show']
-  namespace :admin do
-    resources :users, shallow: true
+
+  resources :admins, only: :show do
+    get 'manage_photo', to: 'admins#manage_photo'
+    get 'manage_album', to: 'admins#manage_album'
+    get 'manage_user', to: 'admins#manage_user'
+    resources :users, only: [:edit,:destroy]
   end
 end

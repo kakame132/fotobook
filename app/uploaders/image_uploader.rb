@@ -32,11 +32,33 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :thumb do
     process resize_to_fill: [200, 200]
   end
+
   version :test_xmall do
     process resize_to_fit: [100, 100]
   end
+
   version :my_profile do
     process resize_to_fill: [185, 185]
+  end
+
+  version :feed do
+    process resize_to_fill: [255, 255]
+  end
+
+  version :avatar do
+    process resize_to_fill: [171, 171]
+  end
+
+  version :feed do
+    process resize_to_fill: [255, 255]
+  end
+
+  version :modal do
+    process resize_to_fill: [745, 518]
+  end
+
+  version :edit_photo do
+    process resize_to_fill: [220, 220]
   end
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

@@ -1,9 +1,9 @@
 .selector-for-some-widget {
  box-sizing: content-box;
 }
-/* div {
+div {
  border: 1px red solid;
-} */
+}
 body{
   font-family: Roboto;
   font-style: normal;
@@ -13,8 +13,8 @@ body{
 .close {
   position: absolute;
   top: 0;
-  right: 0;
-  width:19px;height:19px;
+  right: 5px;
+  border-color:grey;background: rgba(0, 0, 0, 0.25);border-radius:14px;
   }
 .grey_background{
   background-color:#F8F8F8;
@@ -64,8 +64,15 @@ color:white;
   width:220px;height:220px;
 }
 .discover_album{
-  width:270px;height:270px;
+  width:255px;height:255px;
   overflow: hidden;
+}
+.avatar{
+  width:171px;height:171px;
+}
+.modal_photo{
+  width: 745px;
+  height: 518px;
 }
 .change_button{
   opacity: 0.7;
@@ -73,13 +80,22 @@ color:white;
 }
 /*admin edit ph albums*/
 .photo_edit{
-  position:absolute;top:0;height:30px;color:white;width:200px;background-color:black;opacity:0.5;
+  position:absolute;top:0;height:30px;color:white;width:190px;background-color:black;opacity:0.5;
+}
+.album_edit{
+  position:absolute;top:0;height:30px;color:white;width:225px;background-color:black;opacity:0.5;
+}
+.edit_button{
+  border-color:grey;background: rgba(0, 0, 0, 0.25);border-radius:14px;bottom:40px;margin-left:143px;
+}
+.edit_album_button{
+  border-color:grey;background: rgba(0, 0, 0, 0.25);border-radius:14px;bottom:5px;margin-left:143px;
 }
 .admin_photo_title{
-  height:30px;color:white;width:170px;overflow:hidden;
+  height:30px;color:white;overflow:hidden;
 }
 .admin_album_size{
-  width:170px;height:170px;
+  width:200px;height:200px;
 }
 .my_profile_photo{
   width:185px;height:185px;
