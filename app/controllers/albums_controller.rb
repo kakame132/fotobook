@@ -36,14 +36,14 @@ class AlbumsController < ApplicationController
 
   def update
     @album = current_user.albums.find(params[:id])
-    @photo =@album.photos.new(photo_params)
-    unless @photo.image_url.nil?
+    unless params[:photo][:image].nil?
+      @photo =@album.photos.new(photo_params)
       @photo.user_id=@album.user_id
       @photo.save
     end
       # @album = current_user.albums.find(params[:id])
     if @album.update_attributes(album_params)
-      redirect_to edit_album_path(id: @album.id)
+      redirect_to edit_album_path(id: @album.id),notice:"update success"
     else
       redirect_to edit_album_path(id: @album.id)
     end
