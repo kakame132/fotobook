@@ -1,0 +1,103 @@
+<div class="container-fluid">
+  <div class="navbar row py-1 fb_background" >
+          <div class="col-2 col-sm-3 col-md-2 text-right">
+              <a class="text-white ml-1 head_font" href="<%=admins_photos_path%>">Fotobook</a>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6">
+              <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+          </div>
+          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5 fb_navbar" >
+            <div class="col-md-7 col-12">
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0].upcase%><%=User.find(current_user.id).first_name[0].upcase%></a>
+              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
+            </div>
+            <div class=" col-md-5 text-center hidden-xs justify-content-center">
+              <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
+            </div>
+          </div>
+      </div>
+      <div class="row grey_background justify-content-center p-3">
+        <div class="col-12 col-sm-2  pt-4 align-items-center ">
+          <div class="row col  ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admins_photos_path%>">Manage Photos</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admins_albums_path%>">Manage Albums</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn font-size text-color font-weight-bold fb_color" href="<%=admins_users_path%>">Manage Users</a>
+          </div>
+        </div>
+        <div class="col-12 col-sm-9 d-flex justify-content-center">
+          <div class="col-12 bg-white pb-3 mb-5 row justify-content-center">
+
+            <div class="font-weight-bold border-bottom py-4 col-12" style="font-size:20px">
+                Edit User Profile By Admin
+            </div>
+            <%= form_for @user, url: admins_user_path,:html => { :id => "edit_user_admin" }, method: :put do |f| %>
+            <div class="row justify-content-center">
+              <div class="row col-12 justify-content-center">
+
+                <div class="row col-12 justify-content-center">
+                  <div class="col-12 col-sm-8 d-flex justify-content-center">
+                    <div class="row mt-5 mb-3 col-9 col-sm-6 square_photo justify-content-center" name="profile-image">
+                      <%if @user.image.url.nil?%>
+                        <%= image_tag 'avatar.jpg',style:"width:171px;height:171px;"%>
+                      <%else%>
+                        <img src="<%=@user.image.url%>" alt="profile-image" class="img-fluid square_photo rounded">
+                      <%end%>
+                      <div class="col-9 d-flex justify-content-center position-absolute" style="bottom:0">
+                        <button type="button" name="change-profile" class="btn bg-white position-absolute text-secondary change_button">CHANGE</button>
+                        <%= f.file_field :image, style:" opacity:0;width:93px;height:31px;"%>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 pt-3 row text-color justify-content-center my-2 font-weight-bold">
+                  <div class="col-8 fb_color d-flex justify-content-center">Basic Information</div>
+                </div>
+
+                <div class="col-12 pb-5 justify-content-center">
+                <div class="form-group mb-0 row col-12">
+                  <%= f.label :Firstname,class:"col-8 col-md-4 text-right py-2"%><br />
+                  <%= f.text_field :first_name,class:"form-control col-12 col-md-8", autocomplete: "first_name",placeholder:"First Name" %>
+                </div>
+                <div class="form-group mb-0 row col-12">
+                  <%= f.label :Lastname,class:"col-8 col-md-4 text-right py-2"%><br />
+                  <%= f.text_field :last_name,class:"form-control col-12 col-md-8", autocomplete: "last_name",placeholder:"Last Name" %>
+                </div>
+                <div class="form-group mb-0 row col-12">
+                  <%= f.label :email,class:"col-7 col-md-4 text-right py-2" %><br />
+                  <%= f.email_field :email,class:"form-control col-12 col-md-8", autofocus: true, autocomplete: "email",disable: true %>
+                </div>
+                <div class="form-group mb-0 row col-12">
+                  <%= f.label :password,class:"col-9 col-md-4 text-right py-2" %>
+                  <%= f.password_field :password,class:"form-control col-12 col-md-8", placeholder:"********" %>
+
+                </div>
+                <div class="form-group row col-12 text-center">
+                  <!-- <label for="active" class="col-4 text-right mt-2">Active?</label>
+                  <div class="d-flex justify-content-center mt-2">
+                  <input type="checkbox" checked name="active"/> -->
+                  <%= f.label :active, class:"col-4 text-right mt-2" %><br />
+                  <%= f.check_box :active , class:"d-flex justify-content-center mt-2"%>
+                </div>
+                </div>
+                <div class="form-group row col d-flex justify-content-center">
+                    <%= f.submit "Save",class:"btn add px-3 bg-success" %>
+                </div>
+              </div>
+
+
+              </div>
+            </div>
+            <%end%>
+
+
+          </div>
+          <div class="col-12 col-sm-1">
+          </div>
+        </div>
+
+    </div>

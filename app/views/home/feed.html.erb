@@ -1,25 +1,21 @@
-<%= stylesheet_link_tag "fotobook_style" %>
-<%= javascript_pack_tag 'script'%>
-
 
 <div class="container-fluid">
-  <div class="navbar row py-1" style="background-color: #3C5999;" >
+  <div class="navbar row py-1 fb_background" >
           <div class="col-2 col-sm-3 col-md-2 text-right">
-              <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+              <a class="text-white ml-1 head_font" href="<%=feed_path%>">Fotobook</a>
           </div>
           <div class="col-6 col-sm-6 col-md-6">
               <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
           </div>
-          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5 fb_navbar" >
             <div class="col-md-7 col-12">
-              <a class="btn rounded-circle bg-white text-color border-0 px-2" href="my_profile.html"><%=current_user.last_name[0]%><%=current_user.first_name[0]%></a>
-              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%= current_user.first_name%> </a>
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0].upcase%><%=User.find(current_user.id).first_name[0].upcase%></a>
+              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
             </div>
             <div class=" col-md-5 text-center hidden-xs justify-content-center">
               <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
             </div>
           </div>
-
       </div>
     <div class="row p-3 justify-content-center grey_background">
       <div class="col-1 col-sm-2 pt-4 align-items-center">
@@ -27,7 +23,7 @@
           <a class="btn head_font fb_color" href="#"><b>Feeds</b></a>
         </div>
         <div class="row col ml-2">
-          <a class="btn text-secondary head_font" href="discover">Discover</a>
+          <a class="btn text-secondary head_font" href="<%=discover_path%>">Discover</a>
         </div>
       </div>
 
@@ -41,11 +37,13 @@
 
       <div id="photo_tab" class="col-12">
         <div class=" row d-flex justify-content-center px-0">
-        <% @p.each do |i| %>
+        <%unless @photos.nil?%>
+
+        <% @photos.each do |i| %>
           <!-- model begin -->
           <div class="col-12 col-md-5 m-2 row grey_background rounded shadow">
               <div class="col-12 col-md-6 d-flex justify-content-center">
-                <div class="d-flex justify-content-center discover_album">
+                <div class="d-flex justify-content-center discover_album photo-modal">
                   <%= image_tag i.image_url(:feed) if i.image_url.present?%>
                 </div>
               </div>
@@ -61,15 +59,19 @@
                   </div>
 
                 </div>
-                <div class="row font-weight-bold" name="title-post">
+                <div class="row font-weight-bold title-photo" name="title-post">
                   <%= i.title %>
                 </div>
-                <div class="row overflow-auto" name="description-post">
+                <div class="row overflow-auto description-photo" name="description-post">
                   <%= i.description %>
                 </div>
                 <div class="row justify-content-between align-items-center top-100 feed_footer">
                   <div class="col-auto text-color font-size love">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                    <% if liked?(current_user, i) %>
+                                <%= link_to raw('<i class="fas fa-heart text-color"></i>'), like_path(type:'Photo', post_id: i.id, user_id: current_user.id), method: :post, remote: true, name:"like" %>
+                                <% else %>
+                                <%= link_to raw('<i class="fas fa-heart text-grey"></i>'), like_path(type:'Photo', post_id: i.id, user_id: current_user.id), method: :post, remote: true, name:"like" %>
+                                <% end %><span><%= i.like_count %><span>
                   </div>
                   <div class="col-auto text-secondary font-size-sm">
                   <%=i.created_at.to_s(:time)%> <%=i.created_at.to_date%>
@@ -81,19 +83,30 @@
             <!-- model begin -->
               <!--model end-->
         <%end%>
+        <%end%>
+        <div class="col-12 d-flex justify-content-center">
+        <%= paginate @photos %>
+        </div>
         </div>
       </div>
 
       <div id="album_tab" class="d-none col-12">
         <div class="row d-flex justify-content-center px-0">
-        <% @a.each do |i| %>
+          <%unless @albums.nil?%>
+        <% @albums.each do |i| %>
           <!-- model begin -->
           <div class="col-12 row col-md-5 grey_background rounded shadow m-3">
               <div class="col-12 col-md-6 d-flex justify-content-center pr-5">
-                <div class="d-flex mt-3 justify-content-center discover_album">
-                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
-                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
-                  <img src="photo/batman.jpg" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                <div class="d-flex mt-3 justify-content-center discover_album album-modal">
+                  <%if i.photos.empty?%>
+                  <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"%>
+                  <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"%>
+                  <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute discover_album"%>
+                  <%else%>
+                  <img src="<%=i.photos.last.image_url(:thumb)%>" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
+                  <img src="<%=i.photos.last.image_url(:thumb)%>" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
+                  <img src="<%=i.photos.last.image_url(:thumb)%>" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  <%end%>
                 </div>
               </div>
               <div class="col-12 col-md-5">
@@ -108,15 +121,19 @@
                   </div>
 
                 </div>
-                <div class="row font-weight-bold" name="title-post">
+                <div class="row font-weight-bold title-album" name="title-post">
                    <%=i.title %>
                 </div>
-                <div class="row" name="description-post">
+                <div class="row description-album" name="description-post">
                   <%=i.description %>
                 </div>
                 <div class="row justify-content-between align-items-center top-100 feed_footer">
                   <div class="col-auto text-color font-size love">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16" fill="rgb(60, 90, 154)"><path fill-rule="evenodd" d="M7.655 14.916L8 14.25l.345.666a.752.752 0 01-.69 0zm0 0L8 14.25l.345.666.002-.001.006-.003.018-.01a7.643 7.643 0 00.31-.17 22.08 22.08 0 003.433-2.414C13.956 10.731 16 8.35 16 5.5 16 2.836 13.914 1 11.75 1 10.203 1 8.847 1.802 8 3.02 7.153 1.802 5.797 1 4.25 1 2.086 1 0 2.836 0 5.5c0 2.85 2.045 5.231 3.885 6.818a22.075 22.075 0 003.744 2.584l.018.01.006.003h.002z"></path></svg><span>123</span>
+                    <% if liked?(current_user, i) %>
+                                <%= link_to raw('<i class="fas fa-heart text-color"></i>'), like_path(type:'Album', post_id: i.id, user_id: current_user.id), method: :post, remote: true, name:"like" %>
+                                <% else %>
+                                <%= link_to raw('<i class="fas fa-heart text-grey"></i>'), like_path(type:'Album', post_id: i.id, user_id: current_user.id), method: :post, remote: true, name:"like" %>
+                                <% end %><span><%= i.like_count %><span>
                   </div>
                   <div class="col-auto text-secondary font-size-sm">
                     <%=i.created_at.to_s(:time)%> <%=i.created_at.to_date%>
@@ -128,6 +145,10 @@
             <!-- model begin -->
               <!--model end-->
         <% end%>
+        <%end%>
+        <div class="col-12 d-flex justify-content-center">
+        <%= paginate @albums %>
+        </div>
         </div>
       </div>
         <!-- End -->
@@ -161,6 +182,9 @@
       </div>
     </div>
   </div>
+
+
+
 
   <div id="modal-album" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
@@ -198,7 +222,3 @@
         </div>
       </div>
     </div>
-
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

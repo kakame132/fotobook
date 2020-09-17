@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "fotobook_style" %>
 
 <div class="container-fluid">
   <div class="navbar row py-1" style="background-color: #3C5999 ">
@@ -24,8 +23,8 @@
         <div class="col-4 d-flex justify-content-center"><img style="width:70px;height;70px" src=https://img.icons8.com/color/48/000000/twitter-circled.png></div>
       </div>
     </div>
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <form class="pt-3" action="#" method="post">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name) ,:html => { :id => "sign_up_form" } )do |f| %>
+    <form class="pt-3 sign_up_form" action="#" method="post">
           <div class="row my-3 justify-content-center">
             <div class="grey_background justify-content-center shadow border rounded  mb-5 pb-4" style="width:436px" >
               <div class="row justify-content-center">
@@ -76,35 +75,3 @@
 
 
 </div>
-
-
-<script type="text/javascript">
-	$('#new_user').validate({
-		rules: {
-			'user[first_name]': "required",
-			'user[last_name]': "required",
-      'user[email]':"required",
-			'user[password]': {
-				required: true,
-				minlength: 8
-			},
-			'user[password_confirmation]': {
-				equalTo: "#user_password_confirmation",
-				required: true
-			}
-		},
-		messages:  {
-		    'user[first_name]':"Please enter your first name!",
-		    'user[last_name]':"Please enter your last name!",
-        'user[email]':"Please enter your email!",
-		    'user[password]':{
-		        required:"Please enter your password!",
-		        minlength:"Your password must be at least 8 characters long!"
-		    },
-		    'user[password_confirmation]':{
-		        equalTo:"Password is not the same!",
-		        required:"Please enter your password!"
-		    },
-		}
-	});
-</script>

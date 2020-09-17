@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
   var btnPhoto = $("#btn-photo");
   var btnAlbum = $("#btn-album")
   btnPhoto.on({
@@ -11,6 +12,8 @@ $(document).ready(function() {
       }
     }
   })
+
+
   btnAlbum.on({
     "click": function() {
       if (!btnAlbum.hasClass("chosen")) {
@@ -21,40 +24,72 @@ $(document).ready(function() {
       }
     }
   })
-  $(".love").on({
-    "click": function() {
-      var icon = $(this).children("svg");
-      var fill_color = icon.attr("fill");
-      if (fill_color == "rgb(60, 90, 154)"){
-        $(icon).attr("fill","lightgrey");
-        $(this).children("span").text(parseInt($(this).children("span").text()) - 1);
+
+
+  $("a[name='like']").on({
+      "click": function() {
+        var count = $(this).next();
+
+        if ($(this).children().hasClass("text-color")) {
+          $(this).children().removeClass("text-color");
+          $(this).children().addClass("text-grey");
+          count.text(parseInt(count.text())-1);
+        }
+        else {
+          $(this).children().removeClass("text-grey");
+          $(this).children().addClass("text-color");
+          count.text(parseInt(count.text())+1);
+        }
       }
-      else {
-        $(icon).attr("fill", "rgb(60, 90, 154)");
-        $(this).children("span").text(parseInt($(this).children("span").text()) + 1);
-      }
-    }
-  })
-  $("img").on({
+    })
+  //
+
+
+  $(".photo-modal").on({
     "click": function() {
-      var title = $(this).parent().parent().find("div[name='title-post']").html();
-      var source = $(this).attr("src");
-      var description = $(this).parent().parent().find("div[name='description-post']").html()
-      if ($("#btn-photo").hasClass("chosen")) {
+      // var title = $(this).parent().find("div[name='title-post']");
+      var source = $(this).find('img').attr("src");
+      // var description = $(this).parent().find("div[name='description-post']")
+      var title = $(this).closest(".shadow").find(".title-photo").text()
+      var description = $(this).closest(".shadow").find(".description-photo").text()
+      // if ($("#btn-photo").hasClass("chosen")) {
         $("#modal-photo-title").html(title);
         $("#modal-photo-body").attr("src", source)
         $("#modal-photo-description").html(description);
         $("#modal-photo").modal("toggle");
-      }
-      else {
-        $("#modal-album-title").html(title)
-        $("#modal-album-description").html(description)
-        // this is for source of picture in album
-        $("#modal-album").modal("toggle")
-      }
+      // }
+      // else {
+      //   $("#modal-album-title").html(title)
+      //   $("#modal-album-description").html(description)
+      //   // this is for source of picture in album
+      //   $("#modal-album").modal("toggle")
+      // }
+      console.log(title)
+      console.log(description);
     }
   })
-  $("button[name='follow']").on({
+
+  $(".album-modal").on({
+    "click": function() {
+      // var title = $(this).parent().find("div[name='title-post']");
+      var source = $(this).find('img').attr("src");
+      // var description = $(this).parent().find("div[name='description-post']")
+      var title = $(this).closest(".shadow").find(".title-album").text()
+      var description = $(this).closest(".shadow").find(".description-album").text()
+      // if ($("#btn-photo").hasClass("chosen")) {
+        $("#modal-album-title").html(title);
+        $("#modal-album-body").attr("src", source)
+        $("#modal-album-description").html(description);
+        $("#modal-album").modal("toggle");
+      console.log(title);
+      console.log(source);
+      console.log(description);
+    }
+  })
+
+
+
+  $("[name='follow']").on({
     "click": function() {
       if ($(this).hasClass("followed")) {
         $(this).removeClass("followed")
@@ -68,6 +103,8 @@ $(document).ready(function() {
       }
     }
   })
+
+
   $("#btn-photo").on({
     "click": function() {
       $(this).addClass("fb_background")
@@ -75,12 +112,155 @@ $(document).ready(function() {
 
     }
   })
+
+
   $("#btn-album").on({
     "click": function() {
       $(this).addClass("fb_background")
       $("#btn-photo").removeClass("fb_background")
     }
   })
+
+
+  $('#new_user').validate({
+		rules: {
+      'user[email]':"required",
+			'user[password]': {
+				required: true,
+				minlength: 8
+			},
+		},
+		messages:  {
+        'user[email]':"Please enter your email!",
+		    'user[password]':{
+		        required:"Please enter your password!",
+		        minlength:"Your password must be at least 8 characters long!"
+		    },
+		}
+	});
+
+
+  $('#sign_up_form').validate({
+		rules: {
+			'user[first_name]': "required",
+			'user[last_name]': "required",
+      'user[email]':"required",
+			'user[password]': {
+				required: true,
+				minlength: 8
+			},
+			'user[password_confirmation]': {
+				equalTo: "#user_password_confirmation",
+				required: true
+			}
+		},
+		messages:  {
+		    'user[first_name]':"Please enter your first name!",
+		    'user[last_name]':"Please enter your last name!",
+        'user[email]':"Please enter your email!",
+		    'user[password]':{
+		        required:"Please enter your password!",
+		        minlength:"Your password must be at least 8 characters long!"
+		    },
+		    'user[password_confirmation]':{
+		        equalTo:"Password is not the same!",
+		        required:"Please enter your password!"
+		    },
+		}
+	});
+
+
+  $('#edit_user').validate({
+    rules: {
+      'user[first_name]': "required",
+			'user[last_name]': "required",
+      'user[email]':"required",
+      'user[current_password]': {
+        required: true,
+      }
+    },
+    messages:  {
+      'user[first_name]':"Please enter your first name!",
+      'user[last_name]':"Please enter your last name!",
+      'user[email]':"Please enter your email!",
+      'user[current_password]':"Please enter your current password!"
+    },
+    errorPlacement: function(error, element)
+        {
+                error.insertAfter( element );
+         }
+  });
+
+
+  $('#confirmation_form').validate({
+    rules: {
+      'user[email]':"required"
+
+    },
+    messages:  {
+        'user[email]':"Please enter your email!",
+    }
+  });
+
+  $('#forgot_password_form').validate({
+		rules: {
+      'user[email]':"required"
+		},
+		messages:  {
+        'user[email]':"Please enter your email!"
+		}
+	});
+
+
+  $('#new_album,#edit_album,#edit_album_admin').validate({
+    rules: {
+      'photo[title]': "required",
+      'photo[description]':"required"
+    },
+    messages:  {
+      'photo[title]': "Please enter title!",
+      'photo[description]':"Please enter description!"
+    }
+  });
+
+
+  $('#new_photo,#edit_photo,#edit_photo_admin').validate({
+    rules: {
+      'photo[title]': "required",
+      'photo[description]':"required",
+      'photo[image]':{
+          required:true,
+          accept: "image/*"
+      }
+    },
+    messages:  {
+      'photo[title]': "Please enter title!",
+      'photo[description]':"Please enter description!",
+      'photo[image]':{
+        required:"Please upload photo!",
+        accept: "Must be an image"
+      }
+    }
+  });
+
+
+  $('#edit_user_admin').validate({
+    rules: {
+      'user[first_name]': "required",
+      'user[last_name]': "required",
+      'user[email]':"required",
+    },
+    messages:  {
+      'user[first_name]':"Please enter your first name!",
+      'user[last_name]':"Please enter your last name!",
+      'user[email]':"Please enter your email!",
+    },
+    errorPlacement: function(error, element)
+        {
+                error.insertAfter( element );
+         }
+  });
+
 });
 function chooseTabOff() {
   $("div[name='photos-tab']").addClass("d-none");

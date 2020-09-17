@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dmrlcqgoc
+  api_key: '529399184652945'
+  api_secret: falSibIM2gqHCzfkEvO2pViFJ2I
+  enhance_image_tag: true
+  static_file_support: false
+production:
+  cloud_name: dmrlcqgoc
+  api_key: '529399184652945'
+  api_secret: falSibIM2gqHCzfkEvO2pViFJ2I
+  enhance_image_tag: true
+  static_file_support: true
+test:
+  cloud_name: dmrlcqgoc
+  api_key: '529399184652945'
+  api_secret: falSibIM2gqHCzfkEvO2pViFJ2I
+  enhance_image_tag: true
+  static_file_support: false

@@ -1,0 +1,67 @@
+<div class="container-fluid">
+  <div class="navbar row py-1 fb_background" >
+          <div class="col-2 col-sm-3 col-md-2 text-right">
+              <a class="text-white ml-1 head_font" href="<%=admins_photos_path%>">Fotobook</a>
+          </div>
+          <div class="col-6 col-sm-6 col-md-6">
+              <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
+          </div>
+          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5 fb_navbar" >
+            <div class="col-md-7 col-12">
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0].upcase%><%=User.find(current_user.id).first_name[0].upcase%></a>
+              <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
+            </div>
+            <div class=" col-md-5 text-center hidden-xs justify-content-center">
+              <%= link_to "Logout", destroy_user_session_path, {class: "nav-item nav-link btn border-0 text-white", method: "delete"}%>
+            </div>
+          </div>
+      </div>
+      <div class="row grey_background  px-3">
+        <div class="col-12 col-sm-2  mt-3 pt-4 align-items-center ">
+          <div class="row col  ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admins_photos_path%>">Manage Photos</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn font-size text-color font-weight-bold fb_color" href="<%=admins_albums_path%>">Manage Albums</a>
+          </div>
+          <div class="row col ml-2">
+            <a class="btn text-secondary font-size font-weight-bold" href="<%=admins_users_path%>">Manage Users</a>
+          </div>
+        </div>
+        <div class="col-12 col-md-9 p-3 mt-3">
+          <div class="row bg-white pb-3 mb-5 p-0 justify-content-center">
+
+            <%@albums.each do |i|%>
+              <div class=" col-6 col-sm-2 mx-5 mt-3 d-flex justify-content-center" style="height:255px;width:255px;background-color:#E2E2E2;">
+                <div class="d-flex mt-4 justify-content-center admin_album_size">
+                  <%if i.photos.empty?%>
+                  <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic2 square_photo"%>
+                  <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic1 square_photo"%>
+                  <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute square_photo"%>
+                  <%else%>
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail rotate_pic2 square_photo">
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute rotate_pic1 square_photo">
+                      <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute square_photo">
+                  <%end%>
+                </div>
+                <div class="row justify-content-center album_edit">
+                  <div class="col-10 pl-0 admin_photo_title">
+                    <span id="photo_title"><%=i.title%></span>
+                  </div>
+                  <a class="btn col-2 d-flex far fa-edit" href="<%=edit_admins_album_path(i.id)%>" ></a>
+                  <!-- <i ="fad fa-edit" ></i> -->
+                </div>
+
+              </div>
+          <%end%>
+        </div>
+        <div class="col-12 d-flex justify-content-center align-items-end">
+        <%= paginate @albums ,theme: 'twitter-bootstrap-3'%>
+        </div>
+
+
+      </div>
+      <div class="col-1">
+      </div>
+    </div>
+    

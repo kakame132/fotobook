@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_093210) do
+ActiveRecord::Schema.define(version: 2020_09_16_075901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 2020_09_10_093210) do
     t.boolean "public", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "likes"
+    t.integer "likes", default: 0
     t.bigint "user_id"
+    t.integer "like_count", default: 0
     t.index ["user_id"], name: "index_albums_on_user_id"
   end
 
@@ -51,10 +52,11 @@ ActiveRecord::Schema.define(version: 2020_09_10_093210) do
     t.boolean "public", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "likes"
+    t.integer "likes", default: 0
     t.text "image"
     t.bigint "user_id"
     t.bigint "album_id"
+    t.integer "like_count", default: 0
     t.index ["album_id"], name: "index_photos_on_album_id"
     t.index ["user_id"], name: "index_photos_on_user_id"
   end
@@ -75,6 +77,12 @@ ActiveRecord::Schema.define(version: 2020_09_10_093210) do
     t.string "last_name", limit: 30
     t.boolean "admin", default: false
     t.text "image"
+    t.integer "sign_in_count", default: 0, null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet "current_sign_in_ip"
+    t.inet "last_sign_in_ip"
+    t.boolean "active", default: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

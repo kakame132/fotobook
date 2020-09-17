@@ -1,14 +1,14 @@
 <div class="container-fluid">
-  <div class="navbar row py-1" style="background-color: #3C5999;" >
+  <div class="navbar row py-1 fb_background" >
           <div class="col-2 col-sm-3 col-md-2 text-right">
-              <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+              <a class="text-white ml-1 head_font" href="<%=feed_path%>">Fotobook</a>
           </div>
           <div class="col-6 col-sm-6 col-md-6">
               <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
           </div>
-          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+          <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5 fb_navbar" >
             <div class="col-md-7 col-12">
-              <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0]%><%=User.find(current_user.id).first_name[0]%></a>
+              <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0].upcase%><%=User.find(current_user.id).first_name[0].upcase%></a>
               <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
             </div>
             <div class=" col-md-5 text-center hidden-xs justify-content-center">
@@ -29,28 +29,31 @@
         <div class="col-12 d-flex justify-content-center">
           <div class="col row pt-5 px-4" name="profile-header">
             <div class="col-3 d-flex justify-content-center">
-              <img src="<%=@u.image.url(:avatar)%>" alt="avatar" class="img-fluid rounded-circle"  style="width:171px;height:171px"/>
+              <img src="<%=@user.image.url(:avatar)%>" alt="avatar" class="img-fluid rounded-circle"  style="width:171px;height:171px"/>
             </div>
             <div class="col-9">
               <div class="row" style="height:40px;">
-                <button type="button" name="follow" class="btn follow rounded-pill py-0 my-profile" style="border:3px solid orange;color:orange">follow</button>
-              </div>
+                <% if followed?(current_user,@user) %>
+                    <%= link_to "following", follow_path(followed_user_id:@user.id), method: :post, remote: true, name:"follow", class:"rounded-pill followed btn btm-sm font-size-sm p-1"%>
+                <% else %>
+                    <%= link_to "follow", follow_path(followed_user_id:@user.id), method: :post, remote: true, name:"follow", class:"rounded-pill follow btn btm-sm font-size-sm p-1"%>
+                <% end %>              </div>
               <div class="row mt-1">
-                <h1 name="user-name" class="font-width-bold"><%=@u.last_name%> <%=@u.first_name%></h1>
+                <h1 name="user-name" class="font-width-bold"><%=@user.last_name%> <%=@user.first_name%></h1>
               </div>
               <div class="row pl-0 pt-3" >
                   <ul class="nav nav-pills" role="tablist">
                     <div class="col-auto border-right pl-0 text-color tab d-flex justify-content-center" name="photos">
-                      <li role="presentation"><a href="#photos" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@u.photos.count%></span> PHOTOS</a></li>
+                      <li role="presentation"><a href="#photos" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@user.photos.count%></span> PHOTOS</a></li>
                     </div>
                     <div class="col-auto border-right text-secondary tab d-flex justify-content-center" name="albums">
-                        <li role="presentation"><a href="#albums" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@u.albums.count%></span> AlBUMS</a></li>
+                        <li role="presentation"><a href="#albums" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@user.albums.count%></span> AlBUMS</a></li>
                     </div>
                     <div class="col-auto border-right text-secondary tab d-flex justify-content-center" name="followings">
-                      <li role="presentation"><a href="#followings" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@u.followings.count%></span> FOLLOWINGS</a></li>
+                      <li role="presentation"><a href="#followings" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@user.followings.count%></span> FOLLOWINGS</a></li>
                     </div>
                     <div class="col-auto text-secondary tab d-flex justify-content-center" name="followers">
-                      <li role="presentation"><a href="#followers" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@u.followers.count%></span> FOLLOWER</a></li>
+                      <li role="presentation"><a href="#followers" aria-controls="home" role="tab" data-toggle="tab"><span name="num-photos" class="font-size-lg"><%=@user.followers.count%></span> FOLLOWER</a></li>
                     </div>
                   </ul>
               </div>
@@ -65,7 +68,7 @@
           <div class="col-12 pt-5" name="photos-tab">
             <!-- model for row -->
             <div class="row mx-3 my-1 ">
-              <%@u.photos.order(updated_at: :desc).each do |i |%>
+              <%@photos.each do |i |%>
               <div class="col-12 col-md-3 px-3 mt-5 text-center justify-content-center">
                 <div class="d-flex justify-content-center ">
                   <%= image_tag i.image_url(:thumb) if i.image_url.present? %>
@@ -83,15 +86,22 @@
           <div class="d-none col-12 pt-5" name="albums-tab">
             <!-- model for album row -->
             <div class="row my-1 mx-3">
-              <%@u.albums.order(updated_at: :desc).each do |i |%>
+              <%@albums.each do |i |%>
               <div class="col-12 col-md-3 mt-5 thumb  px-3 album-thumb border-0">
                 <div class="thumb-container justify-content-center row">
                   <div class="images-container col-12 d-flex justify-content-center"style="width:200px;height:200px">
-                    <img src="photo/dilinh.jpeg" style="position:absolute;width:200px;height:200px" alt="" class="thumbnail-fluid img-fluid border">
-                    <img src="photo/dilinh.jpeg" style="position:absolute;width:200px;height:200px;transform:rotate(4deg)" alt="" class="thumbnail-fluid img-fluid border">
-                    <img src="photo/batman.jpeg" style="position:absolute;width:200px;height:200px;transform:rotate(10deg)" alt="" class="thumbnail-fluid img-fluid border">
-                    <div class="content text-center mt-5 text-white font-size-lg rounded-circle"style="position:absolute;background-color:rgba(51, 51, 51, 0.4)">
-                      <div class="number" style="opacity:1">
+
+                    <%if i.photos.empty?%>
+                    <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic2 square_photo"%>
+                    <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic1 square_photo"%>
+                    <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute square_photo"%>
+                    <%else%>
+                    <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute rotate_pic2 square_photo"/>
+                    <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute rotate_pic1 square_photo"/>
+                    <img src="<%=i.photos.last.image_url(:thumb)%>" alt="" class="img-fluid img-thumbnail position-absolute square_photo"/>
+                    <%end%>
+                    <div class="content text-center justify-content-center mt-5 text-white font-size-lg rounded-circle photo_count_circle">
+                      <div class="number mt-2" style="opacity:1">
                         <%=i.photos.count%>
                       </div>
                       <div class="label" style="opacity:1">
@@ -116,10 +126,10 @@
           <div class="d-none pt-5 col-12" name="followings-tab">
             <!-- model for followings-tab row -->
             <div class="row mx-3 my-1">
-              <%@u.followings.order(updated_at: :desc).each do |i|%>
+              <%@user.followings.order(updated_at: :desc).each do |i|%>
               <div class="col-12 col-md-3 mt-5 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
                 <div class="row mt-3 d-flex justify-content-center">
-                  <img src="photo/momo.png" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
+                  <img src=<%= i.image_url(:avatar) %> alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
                 </div>
                 <div class="my-1 justify-content-center row col-12">
                   <a href="<%= user_path(i.id)%>" class="btn font-size"><%= i.first_name %></a>
@@ -134,8 +144,14 @@
                     <div class="row justify-content-center font-size">ALBUMS</div>
                   </div>
                 </div>
-                <div class="row col justify-content-center mt-2 mb-3">
-                  <button type="button" name="follow" class="btn follow rounded-pill py-0 my-profile">follow</button>
+                <div class="row col-12 justify-content-center mt-2 mb-3">
+                  <%if i.id !=current_user.id%>
+                  <% if followed?(current_user,i) %>
+                      <%= link_to "following", follow_path(followed_user_id:i.id), method: :post, remote: true, name:"follow", class:"rounded-pill followed btn btm-sm font-size-sm p-1"%>
+                  <% else %>
+                      <%= link_to "follow", follow_path(followed_user_id:i.id), method: :post, remote: true, name:"follow", class:"rounded-pill follow btn btm-sm font-size-sm p-1"%>
+                  <% end %>
+                  <%end%>
                 </div>
               </div>
               <%end%>
@@ -145,10 +161,10 @@
           <div class="d-none col-12 pt-5" name="followers-tab">
             <!-- model for followings-tab row -->
             <div class="row mx-3 my-1">
-              <%@u.followers.order(updated_at: :desc).each do |i|%>
+              <%@user.followers.order(updated_at: :desc).each do |i|%>
               <div class="col-12 col-md-3 mt-5 row shadow rounded justify-content-center mx-2" style="background-color:#F8F8F8">
                 <div class="row mt-3 d-flex justify-content-center">
-                  <img src="photo/momo.png" alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
+                  <img src=<%= i.image_url(:avatar) %> alt="" class="img-fluid rounded-circle" style="width:150px;height:150px">
                 </div>
                 <div class="my-1 justify-content-center row col-12">
                   <a href="<%= user_path(i.id)%>" class="btn font-size"><%= i.first_name %></a>
@@ -163,9 +179,15 @@
                     <div class="row justify-content-center font-size">ALBUMS</div>
                   </div>
                 </div>
-                <div class="row col justify-content-center mt-2 mb-3">
-                  <button type="button" name="follow" class="btn follow rounded-pill py-0 my-profile">follow</button>
-                </div>
+                <div class="row col-12 justify-content-center mt-2 mb-3">
+                  <%if i.id !=current_user.id%>
+                  <% if followed?(current_user,i) %>
+                      <%= link_to "following", follow_path(followed_user_id:i.id), method: :post, remote: true, name:"follow", class:"rounded-pill followed btn btm-sm font-size-sm p-1"%>
+                  <% else %>
+                      <%= link_to "follow", follow_path(followed_user_id:i.id), method: :post, remote: true, name:"follow", class:"rounded-pill follow btn btm-sm font-size-sm p-1"%>
+                  <% end %>
+                  <%end%>
+                  </div>
               </div>
               <%end%>
             </div>
@@ -217,13 +239,13 @@
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                 <div class="carousel-item active">
-                  <img src="photo/batman.jpg" class="d-block w-100" alt="...">
+                  <img src="" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img src="photo/batman.jpg" class="d-block w-100" alt="...">
+                  <img src="" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img src="photo/batman.jpg" class="d-block w-100" alt="...">
+                  <img src="" class="d-block w-100" alt="...">
                 </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -240,5 +262,4 @@
         </div>
       </div>
     </div>
-    <%= stylesheet_link_tag "fotobook_style" %>
     <%= javascript_pack_tag 'script'%>

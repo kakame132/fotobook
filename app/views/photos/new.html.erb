@@ -1,15 +1,15 @@
 
   <div class="container-fluid">
-    <div class="navbar row py-1" style="background-color: #3C5999;" >
+    <div class="navbar row py-1 fb_background" >
             <div class="col-2 col-sm-3 col-md-2 text-right">
-                <a class="text-white ml-1" style="font-size:20px" href="">Fotobook</a>
+                <a class="text-white ml-1 head_font" href="<%=feed_path%>">Fotobook</a>
             </div>
             <div class="col-6 col-sm-6 col-md-6">
                 <input class="rounded border-light w-75" name="search_bar" id="search_bar" type="text" placeholder="Search Photo / Album"></input>
             </div>
-            <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5"style="height:40px" >
+            <div class="col-4 row col-sm-3 col-md-4 pl-5 text-right pr-5 fb_navbar" >
               <div class="col-md-7 col-12">
-                <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0]%><%=User.find(current_user.id).first_name[0]%></a>
+                <a class="btn rounded-circle bg-white text-color border-0 px-2" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).last_name[0].upcase%><%=User.find(current_user.id).first_name[0].upcase%></a>
                 <a class="btn border-0 text-white hidden-xs" href=<%= user_path(current_user.id)%>><%=User.find(current_user.id).first_name%> </a>
               </div>
               <div class=" col-md-5 text-center hidden-xs justify-content-center">
@@ -20,10 +20,10 @@
       <div class="row p-3 justify-content-center" style="background-color:#F8F8F8">
         <div class="col-2 pt-4 align-items-center">
           <div class="row col ml-2">
-            <a class="btn text-secondary" href="feed.html" style="font-size:20px" >Feeds</a>
+            <a class="btn text-secondary" href="<%=feed_path%>" style="font-size:20px" >Feeds</a>
           </div>
           <div class="row col ml-2">
-            <a class="btn text-secondary" href="#" style="font-size:20px" >Discover</a>
+            <a class="btn text-secondary" href="<%=discover_path%>" style="font-size:20px" >Discover</a>
           </div>
         </div>
       <div class="col-9 p-3">
@@ -68,5 +68,27 @@
     </div>
   </div>
 
-  <%= stylesheet_link_tag "fotobook_style" %>
-  <%= javascript_pack_tag 'script'%>
+  <script type="text/javascript">
+    $('#new_photo').validate({
+      rules: {
+        'photo[title]': "required",
+        'photo[description]':"required",
+        'photo[image]':{
+            required:true,
+            accept: "image/*"
+        }
+      },
+      messages:  {
+        'photo[title]': "Please enter title!",
+        'photo[description]':"Please enter description!",
+        'photo[image]':{
+          required:"Please upload photo!",
+          accept: "Must be an image"
+        }
+      }
+      // errorPlacement: function(error, element)
+      //     {
+      //             error.insertAfter( element );
+      //      }
+    });
+  </script>

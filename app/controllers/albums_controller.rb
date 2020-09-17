@@ -1,6 +1,6 @@
 class AlbumsController < ApplicationController
   def index
-   @album = Album.order('created_at DESC')
+   @albums = Album.order('created_at DESC')
   end
 
 
@@ -23,6 +23,7 @@ class AlbumsController < ApplicationController
     end
   end
 
+
   def edit
     if current_user.admin == false
       @album=current_user.albums.find(params[:id])
@@ -32,25 +33,22 @@ class AlbumsController < ApplicationController
     @photo=current_user.photos.new()
   end
 
+
   def update
-    if current_user.admin == false
-      @album = current_user.albums.find(params[:id])
-    else
-      @album=Album.find(params[:id])
-    end
+    @album = current_user.albums.find(params[:id])
     @photo =@album.photos.new(photo_params)
-    @photo.user_id=@album.user_id
-    if @photo.save
+    unless @photo.image_url.nil?
+      @photo.user_id=@album.user_id
+      @photo.save
+    end
       # @album = current_user.albums.find(params[:id])
-      if @album.update_attributes(album_params)
-        redirect_to edit_album_path(id: @album.id)
-      else
-        redirect_to edit_album_path(id: @album.id)
-      end
+    if @album.update_attributes(album_params)
+      redirect_to edit_album_path(id: @album.id)
     else
       redirect_to edit_album_path(id: @album.id)
     end
   end
+
 
   def destroy
     if current_user.admin==true
@@ -67,8 +65,9 @@ class AlbumsController < ApplicationController
       end
     end
   end
-  private
 
+
+  private
   def photo_params
     params.require(:photo).permit(:title, :description, :image,:public)
   end

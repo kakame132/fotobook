@@ -3,13 +3,13 @@ class HomeController < ApplicationController
   def guestfeed
     if(user_signed_in?)
       if current_user.admin == true
-        redirect_to admin_manage_photo_path(current_user.id)
+        redirect_to admins_photos_path
       else
         redirect_to :feed
       end
     else
-      @p=Photo.order(created_at: :desc).limit(6)
-      @a=Album.order(created_at: :desc).limit(6)
+      @photos=Photo.all.where(public: true).order(created_at: :desc).page(params[:page]).per(6)
+      @albums=Album.all.where(public: true).order(created_at: :desc).page(params[:page]).per(6)
       render 'guestfeed'
     end
   end
@@ -21,17 +21,17 @@ class HomeController < ApplicationController
     render 'newest'
   end
 
+
   def feed
-    @u=current_user
-    @p=current_user.followings.map { |user| user.photos.all.where(public:true).order(created_at: :desc) }.flatten!
-    @a=current_user.followings.map { |user| user.albums.all.where(public:true).order(created_at: :desc) }.flatten!
+    @photos=Photo.where(user_id: current_user.followings.ids,public: true).order(created_at: :desc).page(params[:page]).per(6)
+    @albums=Album.where(user_id: current_user.followings.ids,public: true).order(created_at: :desc).page(params[:page]).per(6)
     render 'feed'
   end
 
+
   def discover
-    @u=current_user
-    @p=Photo.order(created_at: :desc).limit(6)
-    @a=Album.order(created_at: :desc).limit(6)
+    @photos=Photo.all.where(public: true).order(created_at: :desc).page(params[:page]).per(6)
+    @albums=Album.all.where(public: true).order(created_at: :desc).page(params[:page]).per(6)
     # @l=User.find_by(id:1)
     render 'discover'
   end

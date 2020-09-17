@@ -30,6 +30,10 @@ gem 'carrierwave', '~> 2.0'
 gem 'devise'
 gem "redis"
 gem 'mini_magick'
+gem 'ransack'
+gem 'bootstrap-kaminari-views'
+gem 'cloudinary'
+
 # gem "rails_admin"
 
 # Use Active Storage variant

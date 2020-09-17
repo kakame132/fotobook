@@ -12,10 +12,9 @@ Rails.application.routes.draw do
   resources :photos ,except: ['show']
   resources :albums ,except: ['show']
 
-  resources :admins, only: :show do
-    get 'manage_photo', to: 'admins#manage_photo'
-    get 'manage_album', to: 'admins#manage_album'
-    get 'manage_user', to: 'admins#manage_user'
-    resources :users, only: [:edit,:destroy]
+  namespace :admins, only: :show do
+    resources :users,:photos,:albums, only: [:index,:edit,:update,:destroy]
   end
+  post 'follow', to: 'users#follow'
+  post 'like', to: 'users#like'
 end

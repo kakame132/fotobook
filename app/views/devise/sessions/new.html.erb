@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "fotobook_style" %>
 <div class="container-fluid">
   <div class="navbar row py-1" style="background-color: #3C5999 ;" >
           <div class="col-2 col-sm-3 col-md-2 text-right">
@@ -71,21 +70,3 @@
 
 <% end %>
 </div>
-<script type="text/javascript">
-	$('#new_user').validate({
-		rules: {
-      'user[email]':"required",
-			'user[password]': {
-				required: true,
-				minlength: 8
-			},
-		},
-		messages:  {
-        'user[email]':"Please enter your email!",
-		    'user[password]':{
-		        required:"Please enter your password!",
-		        minlength:"Your password must be at least 8 characters long!"
-		    },
-		}
-	});
-</script>
