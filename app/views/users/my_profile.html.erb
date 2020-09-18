@@ -113,9 +113,9 @@
                     <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic1 square_photo"%>
                     <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute square_photo"%>
                     <%else%>
-                      <img src="<%=i.photos.last.image_url(:thumb)%>" style="position:absolute;width:200px;height:200px;transform:rotate(10deg)" alt="" class="thumbnail-fluid img-fluid border">
-                      <img src="<%=i.photos.last.image_url(:thumb)%>" style="position:absolute;width:200px;height:200px;transform:rotate(4deg)" alt="" class="thumbnail-fluid img-fluid border">
-                      <img src="<%=i.photos.last.image_url(:thumb)%>" style="position:absolute;width:200px;height:200px;" alt="" class="thumbnail-fluid img-fluid border">
+                    <%= image_tag i.photos.last.image_url(:thumb),{class:"img-fluid img-thumbnail position-absolute rotate_pic2 square_photo"}%>
+                    <%= image_tag i.photos.last.image_url(:thumb),{class:"img-fluid img-thumbnail position-absolute rotate_pic1 square_photo"}%>
+                    <%= image_tag i.photos.last.image_url(:thumb),{class:"img-fluid img-thumbnail position-absolute square_photo"}%>
                     <%end%>
                     <a type="button" name="add" class="btn position-absolute text-white py-0 rounded edit_album_button" style="margin-top:200px" href="<%= edit_album_path(id: i.id)%>">Edit</a>
                     <div class="content text-center mt-5 text-white font-size-lg rounded-circle photo_count_circle">
@@ -257,15 +257,6 @@
           <div class="modal-body my-n1 py-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="" class="d-block w-100" alt="...">
-                </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -281,4 +272,6 @@
         </div>
       </div>
     </div>
+
+
     <%= javascript_pack_tag 'script'%>

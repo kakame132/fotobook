@@ -78,6 +78,24 @@ class UsersController < ApplicationController
     end
 
 
+  def get_album
+     photos = Album.find(params[:content_id]).photos
+     html = String.new
+     i=0
+     photos.each do |p|
+       if i==0
+         html += '<div class="carousel-item active"><img src="'+ p.image.url + '" class="d-block w-100"></div>'
+         i+=1
+       else
+         html += '<div class="carousel-item"><img src="'+ p.image.url + '" class="d-block w-100"></div>'
+       end
+     end
+
+     puts html
+     render :js => html
+   end
+
+
   def show
     if( params[:id] == current_user.id.to_s)
       @photos = current_user.photos.where(album_id: nil).order(updated_at: :desc)

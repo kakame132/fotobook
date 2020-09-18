@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'newest', to: 'home#newest'
   get 'feed', to: 'home#feed'
   get 'discover', to: 'home#discover'
+  get 'get_album', to: "users#get_album"
+
   resources :users, only: :show do
     resources :photos, :albums, only: :index
   end

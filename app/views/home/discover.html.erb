@@ -113,9 +113,9 @@
                     <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"%>
                     <%= image_tag 'no_image.png',class:"img-fluid img-thumbnail position-absolute discover_album"%>
                   <%else%>
-                  <img src="<%=i.photos.last.image_url(:thumb)%>" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic2 discover_album"/>
-                  <img src="<%=i.photos.last.image_url(:thumb)%>" alt="batman" class="img-fluid img-thumbnail position-absolute rotate_pic1 discover_album"/>
-                  <img src="<%=i.photos.last.image_url(:thumb)%>" alt="batman" class="img-fluid img-thumbnail position-absolute discover_album"/>
+                  <%= image_tag i.photos.last.image_url(:thumb),{class:"img-fluid img-thumbnail position-absolute rotate_pic2 discover_album",onclick:"modal_album(#{i.id})"}%>
+                  <%= image_tag i.photos.last.image_url(:thumb),{class:"img-fluid img-thumbnail position-absolute rotate_pic1 discover_album",onclick:"modal_album(#{i.id})"}%>
+                  <%= image_tag i.photos.last.image_url(:thumb),{class:"img-fluid img-thumbnail position-absolute discover_album",onclick:"modal_album(#{i.id})"}%>
                   <%end%>
                   </div>
               </div>
@@ -192,7 +192,7 @@
     </div>
   </div>
 
-  
+
   <div id="modal-album" class="modal" tabindex="-1" role="dialog">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -205,15 +205,7 @@
           <div class="modal-body my-n1 py-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="" class=" img d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="" class=" img d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                  <img src="" class="img d-block w-100" alt="...">
-                </div>
+
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -229,3 +221,15 @@
         </div>
       </div>
     </div>
+    
+    <script>
+    function modal_album(album_id) {
+    var container = $(".carousel-inner");
+    console.log(container)
+    $.get("get_album.js", {content_id: album_id}, function() {
+      console.log(123)
+    }).done(function(data) {
+      container.html(data);
+    })
+    }
+    </script>

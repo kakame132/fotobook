@@ -9,9 +9,11 @@ body{
   font-style: normal;
   font-weight:  bold;
 }
+
 .text-grey{
   color: grey;
 }
+
 .text-color{
   color:#3C5999;
 }
@@ -22,6 +24,7 @@ body{
   right: 5px;
   border-color:grey;background: rgba(0, 0, 0, 0.25);border-radius:14px;
   }
+
 .grey_background{
   background-color:#F8F8F8;
 }
@@ -30,9 +33,11 @@ body{
   background-color: #3C5999;
   color:white
 }
+
 .fb_navbar{
   height: 40px;
 }
+
 .fb_color{
   color:#3C5999;
 }
@@ -40,6 +45,7 @@ body{
 background:linear-gradient(238.39deg, #EB6057 27.49%, #F2994A 69.05%);
 color:white;
 } */
+
 .followed{
   background:linear-gradient(238.39deg, #EB6057 27.49%, #F2994A 69.05%);
   color:white;
@@ -79,24 +85,30 @@ color:white;
 .square_photo{
   width:200px;height:200px;
 }
+
 .square_edit_photo{
   width:220px;height:220px;
 }
+
 .discover_album{
   width:255px;height:255px;
   overflow: hidden;
 }
+
 .avatar{
   width:171px;height:171px;
 }
+
 .modal_photo{
   width: 745px;
   height: 518px;
 }
+
 .change_button{
   opacity: 0.7;
   bottom:0;
 }
+
 /*admin edit ph albums*/
 .photo_edit{
   position:absolute;top:0;height:30px;color:white;width:190px;background-color:black;opacity:0.5;
@@ -115,7 +127,7 @@ color:white;
 }
 
 .edit_album_button{
-  border-color:grey;background: rgba(0, 0, 0, 0.25);border-radius:14px;bottom:5px;margin-left:143px;
+  border-color:grey;background: rgba(0, 0, 0, 0.25);border-radius:14px;bottom:5px;margin-left:137px;
 }
 
 .admin_photo_title{

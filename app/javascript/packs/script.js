@@ -72,13 +72,11 @@ $(document).ready(function() {
   $(".album-modal").on({
     "click": function() {
       // var title = $(this).parent().find("div[name='title-post']");
-      var source = $(this).find('img').attr("src");
       // var description = $(this).parent().find("div[name='description-post']")
       var title = $(this).closest(".shadow").find(".title-album").text()
       var description = $(this).closest(".shadow").find(".description-album").text()
       // if ($("#btn-photo").hasClass("chosen")) {
         $("#modal-album-title").html(title);
-        $("#modal-album-body").attr("src", source)
         $("#modal-album-description").html(description);
         $("#modal-album").modal("toggle");
       console.log(title);
@@ -86,7 +84,6 @@ $(document).ready(function() {
       console.log(description);
     }
   })
-
 
 
   $("[name='follow']").on({
